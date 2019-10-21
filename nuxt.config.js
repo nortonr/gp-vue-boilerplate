@@ -3,12 +3,15 @@
 const path = require('path');
 const fs = require('fs');
 const isDev = process.env.NODE_ENV === 'development';
+const vars = require('./env/vars.json');
 
 module.exports = {
   dev: isDev,
   srcDir: 'src/',
   css: [],
-  env: {},
+  env: {
+    I18N_MODULE_ACTIVATED: vars.env.I18N_MODULE_ACTIVATED
+  },
 
   server: {
     port: 8050,
@@ -19,7 +22,10 @@ module.exports = {
       const crt = path.join(dir, 'server.crt');
 
       if (fs.existsSync(key) && fs.existsSync(crt)) {
-        return { key: fs.readFileSync(key), cert: fs.readFileSync(crt) };
+        return {
+          key: fs.readFileSync(key),
+          cert: fs.readFileSync(crt)
+        };
       } else {
         return null;
       }
@@ -30,12 +36,22 @@ module.exports = {
   build: {
     analyze: false,
     filenames: {
-      app: ({ isDev }) => isDev ? '[name].js' : '[name].[chunkhash].js',
-      chunk: ({ isDev }) => isDev ? '[name].js' : '[name].[chunkhash].js'
+      app: ({
+        isDev
+      }) => isDev ? '[name].js' : '[name].[chunkhash].js',
+      chunk: ({
+        isDev
+      }) => isDev ? '[name].js' : '[name].[chunkhash].js'
     },
     babel: {
-      presets ({ isServer }) {
-        const targets = isServer ? { node: 'current' } : { ie: 11 };
+      presets({
+        isServer
+      }) {
+        const targets = isServer ? {
+          node: 'current'
+        } : {
+          ie: 11
+        };
         return [
           [
             require.resolve('@nuxt/babel-preset-app'), {
@@ -88,7 +104,9 @@ module.exports = {
 
   render: {
     resourceHints: false,
-    http2: { push: true }
+    http2: {
+      push: true
+    }
   },
 
   router: {
@@ -97,8 +115,12 @@ module.exports = {
   },
 
   plugins: [
-    { src: '@/plugins/intersectionObserver' },
-    { src: '@/plugins/lazyHydrate' }
+{
+      src: '@/plugins/intersectionObserver'
+    },
+    {
+      src: '@/plugins/lazyHydrate'
+    }
   ],
 
   modules: [
@@ -137,29 +159,7 @@ module.exports = {
         }
       }
     ],
-    [
-      'nuxt-i18n', {
-        locales: [
-          {
-            code: 'en',
-            iso: 'en-US',
-            file: 'en.json',
-          },
-          {
-            code: 'de',
-            iso: 'de-DE',
-            file: 'de.json'
-          }
-        ],
-        parsePages: true,
-        lazy: true,
-        langDir: 'globals/locales/',
-        defaultLocale: 'de',
-        strategy: 'prefix_except_default',
-        seo: true,
-        vueI18nLoader: true
-      }
-    ],
+    getI18nModule(vars.env.I18N_MODULE_ACTIVATED || true),
     [
       'nuxt-polyfill', {
         features: [
@@ -276,12 +276,46 @@ module.exports = {
 
   head: {
     meta: [
-      { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+{
+        'http-equiv': 'X-UA-Compatible',
+        content: 'IE=edge'
+      },
+      {
+        name: 'viewport',
+        content: 'width=device-width, initial-scale=1'
+      },
     ]
   }
 };
 
-function getBasePath () {
+function getI18nModule(i18n) {
+  if (i18n) {
+    return [
+      'nuxt-i18n', {
+        locales: [
+{
+            code: 'en',
+            iso: 'en-US',
+            file: 'en.json',
+          },
+          {
+            code: 'de',
+            iso: 'de-DE',
+            file: 'de.json'
+          }
+        ],
+        parsePages: true,
+        lazy: true,
+        langDir: 'globals/locales/',
+        defaultLocale: 'de',
+        strategy: 'prefix_except_default',
+        seo: true,
+        vueI18nLoader: true
+      }
+    ];
+  }
+}
+
+function getBasePath() {
   return process.env.npm_config_base || '/';
 }
