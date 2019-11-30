@@ -49,6 +49,13 @@ module.exports = {
 
   build: {
     analyze: false,
+
+    // extend (config, ctx) {
+    //   if (ctx.isDev) {
+    //     config.devtool = ctx.isClient ? 'source-map' : 'inline-source-map';
+    //   }
+    // },
+
     filenames: {
       app: ({ isDev }) => isDev ? '[name].js' : '[name].[chunkhash].js',
       chunk: ({ isDev }) => isDev ? '[name].js' : '[name].[chunkhash].js'
@@ -143,8 +150,11 @@ module.exports = {
   plugins: [],
 
   modules: [
-    '@/modules/virtual',
-    //'@/modules/codesandbox',
+    [
+      '@/modules/virtualContent', {}
+    ],
+    // '@/modules/virtual',
+    // '@/modules/codesandbox',
     '@/modules/fix/image',
     '@/modules/svg',
     '@/modules/image',
@@ -190,7 +200,7 @@ module.exports = {
             iso: 'de-DE'
           }
         ],
-        // parsePages: true,
+        parsePages: false,
         // lazy: true,
         // langDir: 'globals/locales/',
         defaultLocale: DEFAULT_LANG,
@@ -286,41 +296,41 @@ module.exports = {
 
   buildModules: [
 
-    [
-      '@nuxtjs/pwa', {
-        dev: isDev,
-        icon: {
-          iconSrc: 'src/static/favicon.png',
-          sizes: [
-            16, 120, 144, 152, 192, 384, 512
-          ]
-        },
-        meta: {
-          charset: 'utf-8',
-          viewport: 'width=device-width, initial-scale=1',
-          mobileApp: true,
-          mobileAppIOS: true,
-          appleStatusBarStyle: 'default',
-          favicon: true,
-          name: 'TITLE',
-          author: 'metaAuthor',
-          description: 'metaDescription',
-          theme_color: 'black',
-          lang: 'de',
-          ogType: 'website',
-          ogSiteName: 'ogSITE_NAME',
-          ogTitle: 'ogTITLE',
-          ogDescription: 'ogDESCRIPTION',
-          ogHost: undefined,
-          ogImage: true
-        },
-        manifest: {
-          name: 'Sample MANIFEST',
-          short_name: 'Sample',
-          lang: 'de'
-        }
-      }
-    ],
+    // [
+    //   '@nuxtjs/pwa', {
+    //     dev: isDev,
+    //     icon: {
+    //       iconSrc: 'src/static/favicon.png',
+    //       sizes: [
+    //         16, 120, 144, 152, 192, 384, 512
+    //       ]
+    //     },
+    //     meta: {
+    //       charset: 'utf-8',
+    //       viewport: 'width=device-width, initial-scale=1',
+    //       mobileApp: true,
+    //       mobileAppIOS: true,
+    //       appleStatusBarStyle: 'default',
+    //       favicon: true,
+    //       name: 'TITLE',
+    //       author: 'metaAuthor',
+    //       description: 'metaDescription',
+    //       theme_color: 'black',
+    //       lang: 'de',
+    //       ogType: 'website',
+    //       ogSiteName: 'ogSITE_NAME',
+    //       ogTitle: 'ogTITLE',
+    //       ogDescription: 'ogDESCRIPTION',
+    //       ogHost: undefined,
+    //       ogImage: true
+    //     },
+    //     manifest: {
+    //       name: 'Sample MANIFEST',
+    //       short_name: 'Sample',
+    //       lang: 'de'
+    //     }
+    //   }
+    // ],
     [
       '@nuxtjs/sitemap', {
         path: 'sitemap.xml',
@@ -384,4 +394,3 @@ function getProjectRoutes (defaultLang) {
     }, result);
   }, []);
 }
-
