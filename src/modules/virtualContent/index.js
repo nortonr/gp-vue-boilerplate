@@ -7,9 +7,13 @@ const utils = require('./utils');
 
 module.exports = async function (options) {
 
-  options = Object.assign({ componentPrefix: 'virtual', isDev: this.nuxt.options.dev }, options);
+  options = Object.assign({ adapter: null, componentPrefix: 'virtual', isDev: this.nuxt.options.dev }, options);
 
-  const routes = await utils.getRoutes();
+  if (!options.adapter || !options.adapter.getRoutes) {
+    throw new Error('no adapter defined!');
+  }
+
+  const routes = await options.adapter.getRoutes();
 
   utils.extendsNuxtI18nPages(this.options, routes);
 
@@ -19,21 +23,14 @@ module.exports = async function (options) {
   });
 
   this.extendRoutes((nuxtRoutes, resolve) => {
-
     nuxtRoutes.splice(0, nuxtRoutes.length);
-
     routes.forEach(route => {
-
       nuxtRoutes.push({
         name: route.path.replace(/\//g, '-'),
-        // path: path.url,
-        // component: '@/virtual-pages/index',
         component: resolve(path.join('@/virtual-pages', route.path)),
         chunkName: path.join('pages', route.path)
       });
-
     });
-
   });
 
 };

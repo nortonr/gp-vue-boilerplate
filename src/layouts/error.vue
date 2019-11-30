@@ -1,20 +1,20 @@
 
 <template>
   <div class="content">
-    <component
-      :is="item.asyncComponent"
-      v-for="(item, index) in components"
-      :key="index"
-      v-bind="item.data"
-    />
+    <gp-organism-stage-picture v-bind="stagePicture" />
+    <gp-organism-text v-bind="text" />
   </div>
 </template>
 
 <script>
+import gpOrganismStagePicture from '@/components/organisms/StagePicture';
+import gpOrganismText from '@/components/organisms/Text';
 
-import { getAsyncComponents } from '@/utils/async-components';
 export default {
-
+  components: {
+    gpOrganismStagePicture,
+    gpOrganismText
+  },
   head () {
     return {
       title: this.error.statusCode
@@ -37,42 +37,34 @@ export default {
   },
 
   computed: {
-    dataComponents () {
-      return [
-        {
-          'component': 'StagePicture',
-          'data': {
-            'picture': {
-              'sourceClientOnly': false,
-              'sources': [
-                {
-                  'media': 'default',
-                  'srcset': 'img/error.jpg'
-                }
-              ]
-            }
-          }
-        },
-        {
-          'component': 'Text',
-          'data': {
-            article: {
-              headline: {
-                overline: null,
-                headline: String(this.error.statusCode),
-                subline: null
-              },
-              content: `<p>${this.error.message}</p>`
-            }
-          }
-        }
-      ];
-    }
-  },
 
-  created () {
-    this.components = getAsyncComponents(this.dataComponents);
+    stagePicture () {
+      return {
+        'picture': {
+          'sourceClientOnly': false,
+          'sources': [
+            {
+              'media': 'default',
+              'srcset': 'img/error.jpg'
+            }
+          ]
+        }
+      };
+    },
+    text () {
+      return {
+        article: {
+          headline: {
+            overline: null,
+            headline: String(this.error.statusCode),
+            subline: null
+          },
+          content: `<p>${this.error.message}</p>`
+        }
+      };
+    }
   }
+
 };
 </script>
 

@@ -150,7 +150,9 @@ module.exports = {
 
   modules: [
     [
-      '@/modules/virtualContent', {}
+      '@/modules/virtualContent', {
+        adapter: require('./src/modules/virtualContent/adapter/localJSON')
+      }
     ],
     // '@/modules/virtual',
     // '@/modules/codesandbox',
