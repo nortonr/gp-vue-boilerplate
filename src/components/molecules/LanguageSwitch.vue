@@ -5,7 +5,7 @@
       :key="language.code"
     >
       <gp-atom-link
-        :url="switchLocalePath(language.code)"
+        :url="url(language)"
         class="language-switch"
         :title="language.code"
       />
@@ -30,13 +30,21 @@ export default {
       default () { return false; }
     }
   },
-
   computed: {
     languages: function () {
       return this.$i18n.locales.filter((locale) => {
         return !this.filterCurrentLang || this.filterCurrentLang && locale.code !== this.$i18n.locale;
       });
     }
+  },
+  methods: {
+    url (language) {
+      const url = this.switchLocalePath(language.code);
+      if (/undefined$/.test(url)) {
+        return this.localePath('index');
+      }
+      return url;
+    },
   }
 };
 </script>

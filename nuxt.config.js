@@ -5,6 +5,16 @@ const fs = require('fs');
 const isDev = process.env.NODE_ENV === 'development';
 
 const DEFAULT_LANG = 'de';
+const LOCALES = [
+  {
+    code: 'en',
+    iso: 'en-US'
+  },
+  {
+    code: 'de',
+    iso: 'de-DE'
+  }
+];
 
 module.exports = {
   dev: isDev,
@@ -154,6 +164,9 @@ module.exports = {
   modules: [
     [
       '@/modules/virtual-content', {
+        locales: LOCALES,
+        debug: true,
+        routesCache: true,
         virtualPages: false,
         template: false, // false -> Default Template
         adapter: require('./src/modules/virtual-content/adapter/localJSON')
@@ -196,16 +209,7 @@ module.exports = {
     ],
     [
       'nuxt-i18n', {
-        locales: [
-          {
-            code: 'en',
-            iso: 'en-US'
-          },
-          {
-            code: 'de',
-            iso: 'de-DE'
-          }
-        ],
+        locales: LOCALES,
         parsePages: true,
         pages: {
           // uncomment when parsePages false
@@ -384,7 +388,7 @@ function getBaseUrl () {
 }
 
 function getServerHost () {
-  return process.env.npm_config_host || false;
+  return process.env.npm_config_host || 'localhost';
 }
 
 function getBasePath () {

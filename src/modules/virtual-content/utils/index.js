@@ -25,8 +25,8 @@ export function addRoutesToI18nPages (options, routes) {
   options.pages = options.pages || {};
   const pages = options.pages;
   routes.forEach(route => {
-    pages[route.path.replace(/^\//, '')] = Object.keys(route.data).reduce((result, locale) => {
-      result[String(locale)] = route.data[String(locale)].url;
+    pages[route.path.replace(/^\//, '')] = options.locales.reduce((result, { code }) => {
+      result[String(code)] = route.data[String(code)] ? route.data[String(code)].url : false;
       return result;
     }, {});
   }, {});
@@ -46,7 +46,7 @@ const PATH_CACHE_ROUTES = 'src/modules/virtual-content/.cache/routes.json';
 export function cacheRoutes (options, getRoutes) {
   let cacheEmpty = false;
   return getCachedRoutes().then(routes => {
-    cacheEmpty = !options.routesCache || options.routesCache && !routes || process.env.npm_config_clear_virtual_content_cache;
+    cacheEmpty = !options.routesCache || options.routesCache && !routes || process.env.npm_config_virtual_content_clear_cache;
     if (!cacheEmpty) {
       logInfo(`route cache active, read ${routes.length} exists routes`);
       return routes;
@@ -58,8 +58,6 @@ export function cacheRoutes (options, getRoutes) {
     if (options.routesCache && cacheEmpty) {
       logSuccess(`route cache active, ${routes.length} routes saved`, '\n');
       return createRoutesCache(routes);
-    } else {
-      logInfo(`has ${routes.length} routes`, '\n');
     }
     return routes;
   }).then(routes => {

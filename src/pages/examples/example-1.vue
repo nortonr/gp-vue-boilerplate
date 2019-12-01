@@ -14,8 +14,8 @@ export default {
 
   nuxtI18n: {
     paths: {
-      en: '/example/example-1',
-      de: '/beispiel/beispiel-1'
+      en: '/examples/example-1',
+      de: '/beispiele/beispiel-1'
     }
   },
 

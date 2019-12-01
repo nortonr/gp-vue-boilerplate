@@ -7,10 +7,12 @@
 
 <script>
 
-import gpOrganismStagePicture from '@/components/organisms/StagePicture';
-import gpOrganismText from '@/components/organisms/Text';
 export default {
-  components: { gpOrganismStagePicture, gpOrganismText },
+
+  components: {
+    gpOrganismStagePicture: () => import('@/components/organisms/StagePicture'),
+    gpOrganismText: () => import('@/components/organisms/Text')
+  },
 
   props: {
     error: {

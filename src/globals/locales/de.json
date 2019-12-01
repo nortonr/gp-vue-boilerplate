@@ -23,6 +23,16 @@
             "url": "projects-project-2"
           }
         ]
+      },
+      {
+        "title": "Beispiele",
+        "url": "examples",
+        "childrens": [
+          {
+            "title": "Beispiel 1",
+            "url": "examples-example-1"
+          }
+        ]
       }
     ]
   },

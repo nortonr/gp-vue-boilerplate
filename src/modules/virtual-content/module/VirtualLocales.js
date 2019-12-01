@@ -39,7 +39,9 @@ function onCompilation (virtualModule) {
           data.url += 'index';
         }
 
-        const name = data.url;
+        const name = data.url
+          // remove dynamic param
+          .replace(/(.*)\/:.*?$/, '$1');
 
         virtualModule.writeModule(
           path.join('src/virtual-locales', locale, `${name}.json`),

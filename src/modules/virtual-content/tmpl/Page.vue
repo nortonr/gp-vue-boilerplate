@@ -45,14 +45,8 @@ export default {
     };
   },
 
-  asyncData ({ app, route, error }) {
-
-    const path = route.fullPath
-      .replace(/^([\\/]?)\w{2}\//, '/')
-      .replace(/^\/([^?.#]*)[\\/?#]{0,1}[^\\/]*$/, '$1')
-      .replace(/\/index|\/$/, '') || 'index';
-
-    return import(/* webpackMode: "lazy" */`@/virtual-locales/${app.i18n.locale}/${path}.json`).then(data => {
+  asyncData ({ $virtualContent, error }) {
+    return $virtualContent().then(data => {
       return {
         title: data.title,
         meta: [].concat((data.meta || []), getOpenGraph(data.openGraph)),

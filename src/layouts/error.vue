@@ -7,13 +7,11 @@
 </template>
 
 <script>
-import gpOrganismStagePicture from '@/components/organisms/StagePicture';
-import gpOrganismText from '@/components/organisms/Text';
 
 export default {
   components: {
-    gpOrganismStagePicture,
-    gpOrganismText
+    gpOrganismStagePicture: () => import('@/components/organisms/StagePicture'),
+    gpOrganismText: () => import('@/components/organisms/Text')
   },
   head () {
     return {
@@ -64,7 +62,6 @@ export default {
       };
     }
   }
-
 };
 </script>
 

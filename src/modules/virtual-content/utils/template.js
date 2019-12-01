@@ -17,7 +17,7 @@ function getPageTemplate (options, template, pageData) {
   const componentList = Object.keys(components.components).map(key => {
     return components.components[String(key)];
   });
-  const nuxtI18nPaths = getNuxtI18nPaths(pageData.data);
+  const nuxtI18nPaths = getNuxtI18nPaths(options.locales, pageData.data);
 
   // page components & imports
 
@@ -35,9 +35,9 @@ function getPageTemplate (options, template, pageData) {
 
 }
 
-function getNuxtI18nPaths (pageData) {
-  return 'nuxtI18n: { \n    paths: {\n' + Object.keys(pageData).map((locale) => {
-    return `      '${locale}': '${pageData[String(locale)].url}'`;
+function getNuxtI18nPaths (locales, pageData) {
+  return 'nuxtI18n: { \n    paths: {\n' + locales.map(({ code }) => {
+    return `      '${code}': ${pageData[String(code)] ? `'${pageData[String(code)].url}'` : false}`;
   }).join(',\n') + '\n    }\n  }';
 }
 
