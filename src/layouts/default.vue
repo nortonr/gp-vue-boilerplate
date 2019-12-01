@@ -22,6 +22,7 @@
 
 <script>
 
+import { getOpenGraph } from '@/utils/meta';
 import { loadFonts } from '@/utils/fonts';
 import { directionDetectionObserver } from '@/service/viewport';
 
@@ -55,9 +56,11 @@ export default {
     };
 
     const seo = this.$nuxtI18nSeo();
+    const meta = [].concat(getOpenGraph(), seo.meta);
+
     return {
       htmlAttrs: seo.htmlAttrs,
-      meta: seo.meta,
+      meta,
       link: this.fonts.preload.map((font) => {
         return Object.assign(font, pattern);
       }).concat(seo.link)

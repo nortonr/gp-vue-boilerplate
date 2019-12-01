@@ -1,0 +1,24 @@
+[
+  {
+    "path": "blueprint",
+    "data": {
+      "de": {
+        "url": "/blaupause",
+        "title": "Blaupause",
+        "openGraph": {
+          "site_name": null,
+          "title": null,
+          "description": null,
+          "url": null,
+          "image": null,
+          "image_secure_url": null,
+          "image_type": null,
+          "image_width": null,
+          "image_height": null
+        },
+        "meta": {},
+        "components": []
+      }
+    }
+  }
+]

@@ -11,6 +11,9 @@
 </template>
 
 <script>
+
+import { getOpenGraph } from '@/utils/meta';
+
 import {
   // eslint-disable-next-line no-unused-vars
   hydrateWhenVisible
@@ -21,35 +24,38 @@ import {
 export default {
   scrollToTop: true,
 
-  components: { /* PLACEHOLDER_COMPONENTS */ },
+  /* PLACEHOLDER_NUXT_I18N_PATHS */
+
+  components: {
+    /* PLACEHOLDER_COMPONENTS */
+  },
 
   data: function () {
-    return { /* PLACEHOLDER_DATA */ };
+    return {
+      title: null,
+      meta: null,
+      components: []
+    };
   },
 
   head () {
     return {
-      title: this.title
+      title: this.title,
+      meta: this.meta
     };
   },
 
-  asyncData ({ store, app, route, error }) {
+  asyncData ({ app, route, error }) {
 
-    const path = (route.fullPath + '/')
-      // remove lang prefix
-      .replace(/^\//, '')
-      .replace(/^\w{2}\//, '')
-      .replace(/\/$/, '') || 'index';
+    const path = route.fullPath
+      .replace(/^([\\/]?)\w{2}\//, '/')
+      .replace(/^\/([^?.#]*)[\\/?#]{0,1}[^\\/]*$/, '$1')
+      .replace(/\/index|\/$/, '') || 'index';
 
     return import(/* webpackMode: "lazy" */`@/virtual-locales/${app.i18n.locale}/${path}.json`).then(data => {
-
-      // TODO: Brauch man das noch? kann doch auch über die i18n routen gesteuert werden.
-      if ('routeParams' in data) {
-        // set other locale slugs for languageSwitch
-        store.dispatch('i18n/setRouteParams', data.routeParams);
-      }
       return {
         title: data.title,
+        meta: [].concat((data.meta || []), getOpenGraph(data.openGraph)),
         components: data.components
       };
     }).catch(() => {

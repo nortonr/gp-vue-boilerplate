@@ -10,7 +10,7 @@ Ruft asynchron alle Routen ab.
 ```json
 [
   {
-    "path": "index",
+    "path": "/index",
     "data": {
       "de": {
         "url": "/",
@@ -37,7 +37,7 @@ Ruft asynchron alle Routen ab.
     }
   },
   {
-    "path": "contact",
+    "path": "/contact",
     "data": {
       "de": {
         "url": "/kontakt",
@@ -78,7 +78,7 @@ Für jede Sprache müssen folgende Eigenschaften vorhanden sein.
 
 | Eigenschaft | Beschreibung     |
 | ----------- | ---------------- |
-| `path`      | Route Path       |
+| `path`      | Route Name       |
 | `data`      | Sprach-Varianten |
 
 
@@ -93,7 +93,7 @@ Für jede Sprache müssen folgende Eigenschaften vorhanden sein.
 
 ```json
 {
-  "path": "contact",
+  "path": "/contact",
   "data": {
     "de": {
       "url": "/kontakt",

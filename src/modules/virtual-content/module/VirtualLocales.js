@@ -1,11 +1,10 @@
-
-const VirtualModule = require('webpack-virtual-modules');
-const path = require('upath');
-const utils = require('../utils');
+import VirtualModule from 'webpack-virtual-modules';
+import path from 'upath';
+import { getShortName } from '../utils';
 
 const PLUGIN_NAME = 'VirtualLocales';
 
-module.exports = class VirtualLocales extends VirtualModule {
+export default class VirtualLocales extends VirtualModule {
   constructor(options, routes = []) {
     super();
 
@@ -19,7 +18,7 @@ module.exports = class VirtualLocales extends VirtualModule {
     compiler.hooks.compilation.tap(PLUGIN_NAME, onCompilation(this));
   }
 
-};
+}
 
 function onCompilation (virtualModule) {
   return () => {
@@ -56,7 +55,7 @@ function prefixComponentNames (prefix, pageData) {
   const components = pageData.components;
   for (let i = 0; i < components.length; i++) {
     const component = components[Number(i)];
-    component.component = utils.getShortName(prefix, component.component);
+    component.component = getShortName(prefix, component.component);
   }
   return pageData;
 }

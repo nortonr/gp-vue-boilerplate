@@ -10,7 +10,9 @@ module.exports = {
   dev: isDev,
   srcDir: 'src/',
   css: [],
-  env: {},
+  env: {
+    baseUrl: getBaseUrl()
+  },
 
   features: {
     store: true,
@@ -30,6 +32,7 @@ module.exports = {
   },
 
   server: {
+    host: getServerHost(),
     port: 8050,
     timing: false,
     https: (function () {
@@ -150,8 +153,10 @@ module.exports = {
 
   modules: [
     [
-      '@/modules/virtualContent', {
-        adapter: require('./src/modules/virtualContent/adapter/localJSON')
+      '@/modules/virtual-content', {
+        virtualPages: false,
+        template: false, // false -> Default Template
+        adapter: require('./src/modules/virtual-content/adapter/localJSON')
       }
     ],
     // '@/modules/virtual',
@@ -201,9 +206,18 @@ module.exports = {
             iso: 'de-DE'
           }
         ],
-        parsePages: false,
-        // lazy: true,
-        // langDir: 'globals/locales/',
+        parsePages: true,
+        pages: {
+          // uncomment when parsePages false
+          // 'example/index': {
+          //   en: '/example',
+          //   de: '/beispiel'
+          // },
+          // 'example/example-1': {
+          //   en: '/example/example-1',
+          //   de: '/beispiel/beispiel-1'
+          // }
+        },
         defaultLocale: DEFAULT_LANG,
         strategy: 'prefix_except_default',
         seo: false,
@@ -364,6 +378,14 @@ module.exports = {
     ]
   }
 };
+
+function getBaseUrl () {
+  return process.env.npm_config_base_url || '';
+}
+
+function getServerHost () {
+  return process.env.npm_config_host || false;
+}
 
 function getBasePath () {
   return process.env.npm_config_base || '/';

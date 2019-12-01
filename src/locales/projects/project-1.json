@@ -2,6 +2,13 @@
   "de": {
     "url": "/projekte/projekt-1",
     "title": "Projekt 1",
+    "openGraph": {
+      "title": "Projekt 1",
+      "url": "/projekte/projekt-1",
+      "image": "img/open-graph/image.png",
+      "image_secure_url": "img/open-graph/image.png",
+      "image_type": "image/png"
+    },
     "components": [
       {
         "component": "StagePicture",
@@ -55,6 +62,13 @@
   "en": {
     "url": "/projects/project-1",
     "title": "Project 1",
+    "openGraph": {
+      "title": "Project 1",
+      "url": "/projects/project-1",
+      "image": "img/open-graph/image.png",
+      "image_secure_url": "img/open-graph/image.png",
+      "image_type": "image/png"
+    },
     "components": [
       {
         "component": "StagePicture",
