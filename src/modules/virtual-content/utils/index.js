@@ -71,7 +71,7 @@ export function cacheRoutes (options, getRoutes) {
           logs.push(`\n\t\t      ${locale}: ${route.data[String(locale)].url}`);
         });
         logs.push('\n');
-        logInfo(...logs);
+        log(...logs);
       });
     }
     return routes;
@@ -90,6 +90,11 @@ export function logInfo (...message) {
 }
 export function logWarn (message) {
   consola.warn(message);
+}
+export function log (...message) {
+  consola.log(...[
+    '                  '
+  ].concat(message));
 }
 
 export function createRoutesCache (routes) {
@@ -113,7 +118,7 @@ export async function createStaticComponents (options, routes) {
     const filepath = path.join(dest, route.path + '.vue');
     return writeDir(filepath).then(() => writeFile(filepath, route.template)).then(() => {
       if (options.debug) {
-        logSuccess(`write page: ${filepath}`);
+        logSuccess(`write page: ${path.relative(path.join(process.cwd(), PATH_CACHE_PAGES), filepath)}`);
       }
       route.component = filepath;
       return route;
