@@ -51,7 +51,7 @@ export function getShortName (prefix, component) {
 export async function cacheRoutes (options) {
   let cacheEmpty = false;
   let routes = await getCachedRoutes();
-  cacheEmpty = !options.routesCache || options.routesCache && !routes || process.env.npm_config_virtual_content_clear_cache;
+  cacheEmpty = !options.routesCache || options.isDev && options.routesCache && !routes || process.env.npm_config_virtual_content_clear_cache;
   if (cacheEmpty) {
     logWarn('Virtual-Content: request all routes, cache routes for fast startup. options.routesCache', true);
     await cleanCacheDir(PATH_CACHE_DIR);

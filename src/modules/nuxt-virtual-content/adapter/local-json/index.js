@@ -20,7 +20,7 @@ export function getRoutes (options) {
       const shortPath = path.normalize(filePath).replace(rootPath, '').replace('.json', '');
       return getFileContent(filePath, shortPath);
     });
-  }).then(Promise.all).catch(err => { throw err; });
+  }).then(files => Promise.all(files)).catch(err => { throw err; });
 }
 
 function getFileContent (filePath, shortPath) {
