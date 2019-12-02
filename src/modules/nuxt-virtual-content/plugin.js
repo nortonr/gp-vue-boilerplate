@@ -1,3 +1,4 @@
+
 export default (ctx) => {
   ctx.$virtualContent = () => {
     const app = ctx.app;

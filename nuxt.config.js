@@ -5,16 +5,6 @@ const fs = require('fs');
 const isDev = process.env.NODE_ENV === 'development';
 
 const DEFAULT_LANG = 'de';
-const LOCALES = [
-  {
-    code: 'en',
-    iso: 'en-US'
-  },
-  {
-    code: 'de',
-    iso: 'de-DE'
-  }
-];
 
 module.exports = {
   dev: isDev,
@@ -163,13 +153,55 @@ module.exports = {
 
   modules: [
     [
-      '@/modules/virtual-content', {
-        locales: LOCALES,
+      '@/modules/nuxt-virtual-content', {
+        dev: true,
         debug: true,
         routesCache: true,
         virtualPages: false,
         template: false, // false -> Default Template
-        adapter: require('./src/modules/virtual-content/adapter/localJSON')
+        adapter: require('./src/modules/nuxt-virtual-content/adapter/local-json'),
+
+        ignoreRoutes: [
+          'index',
+          'page',
+          'nested-page'
+        ],
+
+        nuxtI18n: {
+          locales: [
+            {
+              code: 'en',
+              iso: 'en-US'
+            },
+            {
+              code: 'de',
+              iso: 'de-DE'
+            }
+          ],
+          parsePages: true,
+          pages: {
+            // uncomment when parsePages false
+            // 'example/index': {
+            //   en: '/example',
+            //   de: '/beispiel'
+            // },
+            // 'example/example-1': {
+            //   en: '/example/example-1',
+            //   de: '/beispiel/beispiel-1'
+            // }
+          },
+          defaultLocale: DEFAULT_LANG,
+          strategy: 'prefix_except_default',
+          seo: false,
+          vueI18nLoader: false,
+          vueI18n: {
+            fallbackLocale: DEFAULT_LANG,
+            messages: {
+              en: require('./src/globals/locales/en.json'),
+              de: require('./src/globals/locales/de.json')
+            }
+          }
+        }
       }
     ],
     // '@/modules/virtual',
@@ -204,34 +236,6 @@ module.exports = {
         gifsicle: {
           interlaced: true,
           optimizationLevel: 3
-        }
-      }
-    ],
-    [
-      'nuxt-i18n', {
-        locales: LOCALES,
-        parsePages: true,
-        pages: {
-          // uncomment when parsePages false
-          // 'example/index': {
-          //   en: '/example',
-          //   de: '/beispiel'
-          // },
-          // 'example/example-1': {
-          //   en: '/example/example-1',
-          //   de: '/beispiel/beispiel-1'
-          // }
-        },
-        defaultLocale: DEFAULT_LANG,
-        strategy: 'prefix_except_default',
-        seo: false,
-        vueI18nLoader: false,
-        vueI18n: {
-          fallbackLocale: DEFAULT_LANG,
-          messages: {
-            en: require('./src/globals/locales/en.json'),
-            de: require('./src/globals/locales/de.json')
-          }
         }
       }
     ],

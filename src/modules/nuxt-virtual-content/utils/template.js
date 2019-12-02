@@ -17,7 +17,7 @@ function getPageTemplate (options, template, pageData) {
   const componentList = Object.keys(components.components).map(key => {
     return components.components[String(key)];
   });
-  const nuxtI18nPaths = getNuxtI18nPaths(options.locales, pageData.data);
+  const nuxtI18nPaths = getNuxtI18nPaths(options.nuxtI18n.locales, pageData.data);
 
   // page components & imports
 

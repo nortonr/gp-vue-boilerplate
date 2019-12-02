@@ -4,23 +4,33 @@
     "navigation": [
       {
         "title": "Home",
-        "url": "index"
+        "url": {
+          "path": "/"
+        }
       },
       {
         "title": "Über uns",
-        "url": "about"
+        "url": {
+          "path": "/ueber-uns"
+        }
       },
       {
         "title": "Projekte",
-        "url": "projects",
+        "url": {
+          "path": "/projekte"
+        },
         "childrens": [
           {
             "title": "Projekt 1",
-            "url": "projects-project-1"
+            "url": {
+              "path": "/projekte/projekt-1"
+            }
           },
           {
             "title": "Projekt 2",
-            "url": "projects-project-2"
+            "url": {
+              "path": "/projekte/projekt-2"
+            }
           }
         ]
       },
@@ -43,15 +53,21 @@
     "navigation": [
       {
         "title": "Kontakt",
-        "url": "contact"
+        "url": {
+          "path": "/kontatk"
+        }
       },
       {
         "title": "Nutzungsbedingungen",
-        "url": "terms"
+        "url": {
+          "path": "/nutzungsbedingungen"
+        }
       },
       {
         "title": "Rechtliche Hinweise",
-        "url": "legals"
+        "url": {
+          "path": "/rechtliche-hinweise"
+        }
       }
     ]
   }

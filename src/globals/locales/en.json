@@ -4,23 +4,33 @@
     "navigation": [
       {
         "title": "Home",
-        "url": "index"
+        "url": {
+          "path": "/"
+        }
       },
       {
         "title": "About",
-        "url": "about"
+        "url": {
+          "path": "/about"
+        }
       },
       {
         "title": "Projects",
-        "url": "projects",
+        "url": {
+          "path": "/projects"
+        },
         "childrens": [
           {
             "title": "Project 1",
-            "url": "projects-project-1"
+            "url": {
+              "path": "/projects/project-1"
+            }
           },
           {
             "title": "Project 2",
-            "url": "projects-project-2"
+            "url": {
+              "path": "/projects/project-2"
+            }
           }
         ]
       },
@@ -43,15 +53,21 @@
     "navigation": [
       {
         "title": "Contact",
-        "url": "contact"
+        "url": {
+          "path": "/contact"
+        }
       },
       {
         "title": "Terms of use",
-        "url": "terms"
+        "url": {
+          "path": "/terms"
+        }
       },
       {
         "title": "Legals",
-        "url": "legals"
+        "url": {
+          "path": "/legals"
+        }
       }
     ]
   }
