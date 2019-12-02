@@ -7,7 +7,7 @@
     <gp-page-menu
       ref="pageMenu"
       v-bind="pageMenu"
-      opened
+      :opened="!preventMenuOpened"
     />
     <gp-page-menu-button
       v-bind="pageMenuButton"
@@ -69,6 +69,11 @@ export default {
 
   data () {
     return {
+      /**
+       * Is deactivated when the menu is activated.
+       * Serves as workaround for ignoring the "hydrateOnInteraction" when changing error.vue (layout) to default.vue (layout).
+       */
+      preventMenuOpened: true,
 
       fonts: {
         preload: [
@@ -141,9 +146,9 @@ export default {
     ];
 
     /**
-     * Tritt ein bei Seitenwechsel über nuxt router.scrollBehavior.js (@/app/router.scrollBehavior.js)
+     * Occurs when changing pages via nuxt router.scrollBehavior.js (@/app/router.scrollBehavior.js)
      * https://router.vuejs.org/guide/advanced/scroll-behavior.html
-     * Setzt die direction wieder auf initial.
+     * Sets the direction back to initial.
      */
     this.$nuxt.$on('triggerScroll', () => {
       this.onDirectionChange(null, true);
@@ -164,6 +169,7 @@ export default {
     },
 
     onClickMenuButton () {
+      this.preventMenuOpened = false;
       this.$refs.pageMenu.$el.dispatchEvent(new CustomEvent('hydrate'));
     }
   },
