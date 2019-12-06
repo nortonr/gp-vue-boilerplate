@@ -1,6 +1,8 @@
 {
   "de": {
-    "url": "/rechtliche-hinweise",
+    "url": {
+      "path": "/rechtliche-hinweise"
+    },
     "title": "Rechtliche Hinweise",
     "components": [
       {
@@ -84,7 +86,9 @@
     ]
   },
   "en": {
-    "url": "/legals",
+    "url": {
+      "path": "/legals"
+    },
     "title": "Legals",
     "components": [
       {

@@ -1,6 +1,8 @@
 {
   "de": {
-    "url": "/",
+    "url": {
+      "path": "/"
+    },
     "title": "Home",
     "components": [
       {
@@ -172,7 +174,9 @@
     ]
   },
   "en": {
-    "url": "/",
+    "url": {
+      "path": "/"
+    },
     "title": "Home",
     "components": [
       {

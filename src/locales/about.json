@@ -1,6 +1,8 @@
 {
   "de": {
-    "url": "/ueber-uns",
+    "url": {
+      "path": "/ueber-uns"
+    },
     "title": "Über uns",
     "components": [
       {
@@ -62,7 +64,9 @@
     ]
   },
   "en": {
-    "url": "/about",
+    "url": {
+      "path": "/about"
+    },
     "title": "About",
     "components": [
       {

@@ -154,9 +154,9 @@ module.exports = {
   modules: [
     [
       '@/modules/nuxt-virtual-content', {
-        dev: true,
+        dev: false,
         debug: true,
-        routesCache: true,
+        routesCache: false,
         virtualPages: false,
         template: false, // false -> Default Template
         adapter: require('./src/modules/nuxt-virtual-content/adapter/local-json'),
@@ -179,17 +179,6 @@ module.exports = {
             }
           ],
           parsePages: true,
-          pages: {
-            // uncomment when parsePages false
-            // 'example/index': {
-            //   en: '/example',
-            //   de: '/beispiel'
-            // },
-            // 'example/example-1': {
-            //   en: '/example/example-1',
-            //   de: '/beispiel/beispiel-1'
-            // }
-          },
           defaultLocale: DEFAULT_LANG,
           strategy: 'prefix_except_default',
           seo: false,

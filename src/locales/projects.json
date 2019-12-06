@@ -1,6 +1,8 @@
 {
   "de": {
-    "url": "/projekte",
+    "url": {
+      "path": "/projekte"
+    },
     "title": "Projekte",
     "components": [
       {
@@ -54,7 +56,9 @@
     ]
   },
   "en": {
-    "url": "/projects",
+    "url": {
+      "path": "/projects"
+    },
     "title": "Projects",
     "components": [
       {

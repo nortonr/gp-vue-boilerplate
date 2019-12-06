@@ -1,6 +1,8 @@
 {
   "de": {
-    "url": "/nutzungsbedingungen",
+    "url": {
+      "path": "/nutzungsbedingungen"
+    },
     "title": "Nutzungsbedingungen",
     "components": [
       {
@@ -84,7 +86,9 @@
     ]
   },
   "en": {
-    "url": "/terms",
+    "url": {
+      "path": "/terms"
+    },
     "title": "Terms",
     "components": [
       {

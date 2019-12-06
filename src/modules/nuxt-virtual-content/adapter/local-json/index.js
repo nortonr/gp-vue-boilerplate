@@ -1,37 +1,22 @@
 
-const glob = require('glob');
-const fs = require('fs');
+const utils = require('./utils');
 const path = require('upath');
 
 const DEFAULT_LOCALES_PATH = path.resolve(process.cwd(), 'src/locales');
 
 export function getRoutes (options) {
   options = Object.assign({ path: DEFAULT_LOCALES_PATH }, options);
-  return new Promise(resolve => {
-    glob(path.resolve(options.path + '/**/*.json'), (err, files) => {
-      if (err) {
-        throw err;
-      }
-      resolve(files);
-    });
-  }).then(files => {
-    const rootPath = path.resolve(process.cwd(), options.path);
-    return files.map((filePath) => {
-      const shortPath = path.normalize(filePath).replace(rootPath, '').replace('.json', '');
-      return getFileContent(filePath, shortPath);
-    });
-  }).then(files => Promise.all(files)).catch(err => { throw err; });
+  const rootPath = path.resolve(process.cwd(), options.path);
+  return utils.getFiles(options.path + '/**/*.json', rootPath)
+    .catch(err => { throw err; });
 }
 
-function getFileContent (filePath, shortPath) {
-  return new Promise(resolve => {
-    fs.readFile(filePath, 'utf8', function (err, content) {
-      resolve(content);
+export function getRoute (path, locale) {
+  const page = utils.getPages()
+    .find(page => {
+      return page.matches.find(match => {
+        return match.locale === locale && match.url === path;
+      });
     });
-  }).then(fileContent => {
-    return {
-      path: shortPath,
-      data: JSON.parse(fileContent)
-    };
-  });
+  return Promise.resolve(page);
 }

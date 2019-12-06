@@ -1,6 +1,8 @@
 {
   "de": {
-    "url": "/projekte/projekt-2",
+    "url": {
+      "path": "/projekte/projekt-2"
+    },
     "title": "Projekt 2",
     "openGraph": {
       "title": "Projekt 2",
@@ -60,7 +62,9 @@
     ]
   },
   "en": {
-    "url": "/projects/project-2",
+    "url": {
+      "path": "/projects/project-2"
+    },
     "title": "Project 2",
     "openGraph": {
       "title": "Project 2",

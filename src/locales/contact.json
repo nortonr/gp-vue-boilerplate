@@ -1,6 +1,8 @@
 {
   "de": {
-    "url": "/kontakt",
+    "url": {
+      "path": "/kontakt"
+    },
     "title": "Kontakt",
     "components": [
       {
@@ -52,7 +54,9 @@
     ]
   },
   "en": {
-    "url": "/contact",
+    "url": {
+      "path": "/contact"
+    },
     "title": "Contact",
     "components": [
       {
