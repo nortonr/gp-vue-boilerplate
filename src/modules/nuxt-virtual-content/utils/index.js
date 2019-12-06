@@ -49,13 +49,16 @@ export function getShortName (prefix, component) {
 
 // eslint-disable-next-line complexity
 export async function cacheRoutes (options) {
+  console.log('options', options);
   let cacheEmpty = false;
   let routes = await getCachedRoutes();
   cacheEmpty = !options.routesCache || options.isDev && options.routesCache && !routes || process.env.npm_config_virtual_content_clear_cache;
-  if (cacheEmpty) {
+  if (!routes || routes.length < 1 || cacheEmpty) {
     logWarn('Virtual-Content: request all routes, cache routes for fast startup. options.routesCache', true);
     await cleanCacheDir(PATH_CACHE_DIR);
-    routes = await options.adapter.getRoutes(options.adapterOptions);
+    routes = await options.adapter.getRoutes(Object.assign({
+      locales: options.nuxtI18n.locales.map(locale => locale.code)
+    }, options.adapterOptions));
   } else {
     logInfo(`route cache active, read ${routes.length} exists routes`);
   }
@@ -72,7 +75,13 @@ export async function cacheRoutes (options) {
         `route: ${route.path.replace(/^\//, '').replace(/\//g, '-')}`
       ];
       locales.forEach(locale => {
-        logs.push(`\n\t\t      ${locale}: ${route.data[String(locale)].url}`);
+
+        let url = route.data[String(locale)].url;
+        if (typeof url === 'object') {
+          url = route.data[String(locale)].url.path;
+        }
+
+        logs.push(`\n\t\t      ${locale}: ${route.data[String(locale)].url.path}`);
       });
       logs.push('\n');
       log(...logs);
@@ -114,15 +123,29 @@ export async function createStaticComponents (options, routes) {
 
 export function writeDir (filepath) {
   return new Promise(resolve => {
+    if (fs.existsSync(path)) {
+      resolve();
+      return;
+    }
     fs.mkdir(path.dirname(filepath), {
       recursive: true
-    }, resolve);
+    }, (err) => {
+      if (err) {
+        throw err;
+      }
+      resolve();
+    });
   });
 }
 
 export function writeFile (filepath, content) {
   return new Promise(resolve => {
-    fs.writeFile(filepath, content, 'utf-8', resolve);
+    fs.writeFile(filepath, content, 'utf-8', (err) => {
+      if (err) {
+        throw err;
+      }
+      resolve();
+    });
   });
 }
 

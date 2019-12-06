@@ -37,7 +37,11 @@ function getPageTemplate (options, template, pageData) {
 
 function getNuxtI18nPaths (locales, pageData) {
   return 'nuxtI18n: { \n    paths: {\n' + locales.map(({ code }) => {
-    return `      '${code}': ${pageData[String(code)] ? `'${pageData[String(code)].url}'` : false}`;
+    let url = pageData[String(code)].url;
+    if (typeof url === 'object') {
+      url = url.path;
+    }
+    return `      '${code}': ${pageData[String(code)] ? `'${url}'` : false}`;
   }).join(',\n') + '\n    }\n  }';
 }
 
@@ -56,14 +60,15 @@ function getImportComponents (options, pageData) {
     const shortName = getShortName(options.componentPrefix, component);
     const componentPath = path.join('@/components/organisms', component);
 
-    if (i < 2) {
-      result.components[String(shortName)] = `    ${shortName}: () => import(/* webpackMode: "eager" */'${componentPath}')`;
+    if (i < 1) {
+      result.components[String(shortName)] = `    ${shortName}: hydrateWhenIdle(() => import(/* webpackMode: "eager" */'${componentPath}'))`;
       // result.imports.push(`import ${shortName} from '${componentPath}';`);
       // result.components[String(shortName)] = shortName;
     } else {
       // result.components[String(shortName)] = `${shortName}:()=>import('${componentPath}')`;
-      result.components[String(shortName)] = `    ${shortName}: hydrateWhenVisible(() => import('${componentPath}'), { observerOptions: { rootMargin: '0px' } })`;
+      result.components[String(shortName)] = `    ${shortName}: hydrateWhenVisible(() => import('${componentPath}'), { observerOptions: { rootMargin: '100px' } })`;
     }
+
     return result;
   }, {
     imports: [],

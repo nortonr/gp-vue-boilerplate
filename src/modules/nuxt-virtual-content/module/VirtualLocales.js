@@ -35,9 +35,14 @@ function onCompilation (virtualModule) {
         data = JSON.parse(JSON.stringify(data)); // clone
         data = prefixComponentNames(virtualModule.options.componentPrefix, data);
 
-        if (/\/$/.test(data.url)) {
-          data.url += 'index';
+        let url = data.url;
+        if (typeof url === 'object') {
+          url = url.path;
         }
+        if (/\/$/.test(url)) {
+          url += 'index';
+        }
+        data.url = url;
 
         const name = data.url
           // remove dynamic param

@@ -15,7 +15,7 @@ export function getRoutes (options) {
       resolve(files);
     });
   }).then(files => {
-    const rootPath = path.resolve(process.cwd(), DEFAULT_LOCALES_PATH);
+    const rootPath = path.resolve(process.cwd(), options.path);
     return files.map((filePath) => {
       const shortPath = path.normalize(filePath).replace(rootPath, '').replace('.json', '');
       return getFileContent(filePath, shortPath);

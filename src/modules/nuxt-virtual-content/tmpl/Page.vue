@@ -38,22 +38,20 @@ export default {
     };
   },
 
-  head () {
-    return {
-      title: this.title,
-      meta: this.meta
-    };
-  },
-
   asyncData ({ $virtualContent, error }) {
+
     return $virtualContent().then(data => {
+      const meta = [].concat((data.meta || []));
+      if ('openGraph' in data) {
+        meta.push(...getOpenGraph(data.openGraph));
+      }
       return {
         title: data.title,
-        meta: [].concat((data.meta || []), getOpenGraph(data.openGraph)),
+        meta,
         components: data.components
       };
     }).catch(() => {
-      error({ statusCode: 404, message: 'local json file not found' });
+      error({ statusCode: 404, message: 'virtual content module not found' });
     });
   },
 
@@ -67,6 +65,13 @@ export default {
       }
       return component;
     });
+  },
+
+  head () {
+    return {
+      title: this.title,
+      meta: this.meta
+    };
   }
 
 };

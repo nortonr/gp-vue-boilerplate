@@ -318,7 +318,6 @@ module.exports = {
   ],
 
   buildModules: [
-
     // [
     //   '@nuxtjs/pwa', {
     //     dev: isDev,
