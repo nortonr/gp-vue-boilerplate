@@ -16,6 +16,8 @@ import { getOpenGraph } from '@/utils/meta';
 
 import {
   // eslint-disable-next-line no-unused-vars
+  hydrateWhenIdle,
+  // eslint-disable-next-line no-unused-vars
   hydrateWhenVisible
 } from 'vue-lazy-hydration';
 
@@ -28,14 +30,6 @@ export default {
 
   components: {
     /* PLACEHOLDER_COMPONENTS */
-  },
-
-  data: function () {
-    return {
-      title: null,
-      meta: null,
-      components: []
-    };
   },
 
   asyncData ({ $virtualContent, error }) {
@@ -53,6 +47,14 @@ export default {
     }).catch(() => {
       error({ statusCode: 404, message: 'virtual content module not found' });
     });
+  },
+
+  data: function () {
+    return {
+      title: null,
+      meta: null,
+      components: []
+    };
   },
 
   created () {

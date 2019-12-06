@@ -19,12 +19,6 @@ export default {
     }
   },
 
-  head () {
-    return {
-      title: this.title
-    };
-  },
-
   data: function () {
     return {
       title: 'Example',
@@ -50,6 +44,12 @@ export default {
           content: '<p>Blanditiis quae optio? Vero nam beatae. Dolorum, risus nulla condimentum, ligula, velit convallis inceptos do dignissimos laoreet? Quam natus quisquam libero laborum omnis vulputate asperiores.</p>'
         }
       }
+    };
+  },
+
+  head () {
+    return {
+      title: this.title
     };
   }
 };
