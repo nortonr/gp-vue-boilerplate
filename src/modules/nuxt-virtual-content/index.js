@@ -63,6 +63,10 @@ module.exports = function (options) {
     nuxtI18n: {}
   }, options);
 
+  if (!options.adapter || !options.adapter.getRoutes) {
+    throw new Error('no adapter defined!');
+  }
+
   let setup = Promise.resolve();
 
   if (!options.dev && options.isDev) {
@@ -87,10 +91,6 @@ module.exports = function (options) {
 function moduleSetup (moduleScope, options) {
 
   options.template = options.template || DEFAULT_TEMPLATE;
-
-  if (!options.adapter || !options.adapter.getRoutes) {
-    throw new Error('no adapter defined!');
-  }
 
   /**
    * add context plugin

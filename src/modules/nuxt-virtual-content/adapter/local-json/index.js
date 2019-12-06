@@ -1,13 +1,8 @@
 
 const utils = require('./utils');
-const path = require('upath');
 
-const DEFAULT_LOCALES_PATH = path.resolve(process.cwd(), 'src/locales');
-
-export function getRoutes (options) {
-  options = Object.assign({ path: DEFAULT_LOCALES_PATH }, options);
-  const rootPath = path.resolve(process.cwd(), options.path);
-  return utils.getFiles(options.path + '/**/*.json', rootPath)
+export function getRoutes () {
+  return utils.getFiles()
     .catch(err => { throw err; });
 }
 

@@ -1,5 +1,12 @@
 const path = require('upath');
 
+const LOCALES_PATH = path.resolve(process.cwd(), 'src/locales');
+function getLocalesContext () {
+  return require.context('@/locales', true, /\.json$/);
+}
+
+// #########################################################
+
 let glob, fs;
 
 if (!process.client) {
@@ -7,16 +14,16 @@ if (!process.client) {
   fs = require('fs');
 }
 
-export function getFiles (dir, rootPath) {
+export function getFiles () {
   return new Promise(resolve => {
-    glob(path.resolve(dir), (err, files) => {
+    glob(path.resolve(path.join(LOCALES_PATH, '/**/*.json')), (err, files) => {
       if (err) {
         throw err;
       }
 
       resolve(files);
     });
-  }).then(files => Promise.all(files.map(filepath => getFileContent(filepath, rootPath))));
+  }).then(files => Promise.all(files.map(filepath => getFileContent(filepath, LOCALES_PATH))));
 }
 
 function getFileContent (filepath, rootPath) {
@@ -35,9 +42,9 @@ function getFileContent (filepath, rootPath) {
 }
 
 export function getPages () {
-  const req = require.context('@/locales', true, /\.json$/);
-  return req.keys().map(path => {
-    const data = req(path);
+  const requireContext = getLocalesContext();
+  return requireContext.keys().map(path => {
+    const data = requireContext(path);
     return Object.keys(data).reduce((result, locale) => {
       const url = data[String(locale)].url.path.replace(/^\//, '').split('/');
       if (url.length > 1) {
