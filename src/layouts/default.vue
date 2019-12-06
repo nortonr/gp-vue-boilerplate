@@ -48,25 +48,6 @@ export default {
     )
   },
 
-  head () {
-    const pattern = {
-      as: 'font',
-      type: 'font/woff2',
-      crossorigin: 'anonymous'
-    };
-
-    const seo = this.$nuxtI18nSeo();
-    const meta = [].concat(getOpenGraph(), seo.meta);
-
-    return {
-      htmlAttrs: seo.htmlAttrs,
-      meta,
-      link: this.fonts.preload.map((font) => {
-        return Object.assign(font, pattern);
-      }).concat(seo.link)
-    };
-  },
-
   data () {
     return {
       /**
@@ -172,6 +153,25 @@ export default {
       this.preventMenuOpened = false;
       this.$refs.pageMenu.$el.dispatchEvent(new CustomEvent('hydrate'));
     }
+  },
+
+  head () {
+    const pattern = {
+      as: 'font',
+      type: 'font/woff2',
+      crossorigin: 'anonymous'
+    };
+
+    const seo = this.$nuxtI18nSeo();
+    const meta = [].concat(getOpenGraph(), seo.meta);
+
+    return {
+      htmlAttrs: seo.htmlAttrs,
+      meta,
+      link: this.fonts.preload.map((font) => {
+        return Object.assign(font, pattern);
+      }).concat(seo.link)
+    };
   },
 };
 

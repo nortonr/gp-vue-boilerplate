@@ -1,0 +1,24 @@
+/* eslint-disable */
+export default (ctx) => {
+  <% if (!options.isDev || options.dev && options.isDev) { %>
+    ctx.$getVirtualContent = () => {
+      const app = ctx.app;
+      const path = getRoutePath(app)
+        .replace(RegExp(`^/${app.i18n.locale}`), '')
+        .replace(/^\/([^?.#]*)[\\/?#]{0,1}[^\\/]*$/, '$1')
+        .replace(/\/index|\/$/, '') || 'index';
+
+      return import(/* webpackMode: "lazy" */`@/virtual-locales/${app.i18n.locale}/${path}.json`).catch(() => {
+        ctx.error({ statusCode: 404, message: 'local json file not found' });
+      });
+    };
+  <% } %>
+    ctx.$getVirtualContentOptions = () => {
+      return <%= JSON.stringify(options) %>;
+    };
+};
+
+function getRoutePath (app) {
+  return app.router.matcher.match(app.localePath(app.getRouteBaseName())).path;
+}
+/* eslint-enable */

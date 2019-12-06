@@ -32,9 +32,9 @@ export default {
     /* PLACEHOLDER_COMPONENTS */
   },
 
-  asyncData ({ $virtualContent, error }) {
+  asyncData ({ $getVirtualContent, error }) {
 
-    return $virtualContent().then(data => {
+    return $getVirtualContent().then(data => {
       const meta = [].concat((data.meta || []));
       if ('openGraph' in data) {
         meta.push(...getOpenGraph(data.openGraph));

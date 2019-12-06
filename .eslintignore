@@ -9,8 +9,7 @@
 /public/
 /reports/
 /w3c/
-/src/static/sitemap.xml
 
 # Files
-!*.tmpl.js
+/src/static/sitemap.xml
 

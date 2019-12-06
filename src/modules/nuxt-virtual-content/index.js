@@ -69,6 +69,18 @@ module.exports = function (options) {
 
   let setup = Promise.resolve();
 
+  /**
+   * add context plugin
+   */
+  this.addPlugin({
+    src: path.resolve(__dirname, 'plugin.tmpl'),
+    options: {
+      dev: options.dev,
+      isDev: options.isDev,
+      adapterOptions: options.adapterOptions
+    }
+  });
+
   if (!options.dev && options.isDev) {
     logWarn('is disabled in development mode');
   } else {
@@ -91,14 +103,6 @@ module.exports = function (options) {
 function moduleSetup (moduleScope, options) {
 
   options.template = options.template || DEFAULT_TEMPLATE;
-
-  /**
-   * add context plugin
-   */
-  moduleScope.addPlugin({
-    src: path.resolve(__dirname, 'plugin.js'),
-    options: {}
-  });
 
   return cacheRoutes(options)
     .then(routes => {

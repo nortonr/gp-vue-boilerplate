@@ -13,11 +13,6 @@ export default {
     gpOrganismStagePicture: () => import('@/components/organisms/StagePicture'),
     gpOrganismText: () => import('@/components/organisms/Text')
   },
-  head () {
-    return {
-      title: this.error.statusCode
-    };
-  },
 
   props: {
     error: {
@@ -61,6 +56,11 @@ export default {
         }
       };
     }
+  },
+  head () {
+    return {
+      title: this.error.statusCode
+    };
   }
 };
 </script>
