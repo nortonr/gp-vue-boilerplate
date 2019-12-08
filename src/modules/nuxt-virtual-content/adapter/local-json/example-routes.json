@@ -1,15 +1,40 @@
 [
   {
-    "path": "blueprint",
+    "path": "/blueprint",
     "data": {
       "de": {
-        "url": "/blaupause",
+        "url": {
+          "path": "/blaupause"
+        },
         "title": "Blaupause",
         "openGraph": {
           "site_name": null,
-          "title": null,
+          "title": "Blaupause",
           "description": null,
-          "url": null,
+          "url": {
+            "path": "/blaupause"
+          },
+          "image": null,
+          "image_secure_url": null,
+          "image_type": null,
+          "image_width": null,
+          "image_height": null
+        },
+        "meta": {},
+        "components": []
+      },
+      "en": {
+        "url": {
+          "path": "/blueprint"
+        },
+        "title": "Blueprint",
+        "openGraph": {
+          "site_name": null,
+          "title": "Blueprint",
+          "description": null,
+          "url": {
+            "path": "/blueprint"
+          },
           "image": null,
           "image_secure_url": null,
           "image_type": null,
@@ -21,4 +46,4 @@
       }
     }
   }
-]
+}

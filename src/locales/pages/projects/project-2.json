@@ -6,7 +6,6 @@
     "title": "Projekt 2",
     "openGraph": {
       "title": "Projekt 2",
-      "url": "/projekte/projekt-2",
       "image": "img/open-graph/image.png",
       "image_secure_url": "img/open-graph/image.png",
       "image_type": "image/png"
@@ -68,7 +67,6 @@
     "title": "Project 2",
     "openGraph": {
       "title": "Project 2",
-      "url": "/projects/project-2",
       "image": "img/open-graph/image.png",
       "image_secure_url": "img/open-graph/image.png",
       "image_type": "image/png"

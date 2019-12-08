@@ -2,7 +2,6 @@
   "de": {
     "openGraph": {
       "title": "Grabarz & Partner - Boilerplate",
-      "url": "/",
       "image": "img/open-graph/image.png",
       "image_secure_url": "img/open-graph/image.png",
       "image_type": "image/png"
@@ -85,7 +84,6 @@
   "en": {
     "openGraph": {
       "title": "Grabarz & Partner - Boilerplate",
-      "url": "/",
       "image": "img/open-graph/image.png",
       "image_secure_url": "img/open-graph/image.png",
       "image_type": "image/png"

@@ -67,6 +67,7 @@ Ruft `asynchron` eine einzelne Route ab.
 | -------------- | --------------- | ----------------------------------------- |
 | route          | `Object`        | Vue-Router Route                          |
 | path           | `String`        | Router Path without locale prefix (`/en`) |
+| defaultLocale  | `String`        | Default locale (`de`)                     |
 | locale         | `String`        | Current locale (`de`)                     |
 | locales        | `Array<String>` | Verwendete Sprachen Bsp.: ['de', 'en', …] |
 | adapterOptions | `Object`        | Adapter-Options from `nuxt-config`        |
@@ -96,6 +97,7 @@ Ruft `asynchron` die Layout-Daten ab.
 | -------------- | --------------- | ----------------------------------------- |
 | route          | `Object`        | Vue-Router Route                          |
 | path           | `String`        | Router Path without locale prefix (`/en`) |
+| defaultLocale  | `String`        | Default locale (`de`)                     |
 | locale         | `String`        | Current locale (`de`)                     |
 | locales        | `Array<String>` | Verwendete Sprachen Bsp.: ['de', 'en', …] |
 | adapterOptions | `Object`        | Adapter-Options from `nuxt-config`        |
