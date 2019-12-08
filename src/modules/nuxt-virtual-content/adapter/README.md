@@ -1,86 +1,121 @@
 # Adapter
 
+- [Adapter](#adapter)
+  - [Constants](#constants)
+    - [PATH](#path)
+  - [Functions](#functions)
+    - [getRoutes](#getroutes)
+    - [getRoute](#getroute)
+    - [getLayout](#getlayout)
+  - [Route](#route)
+
+## Constants
+
+### PATH
+
+Type: `String`
+
+Default: `__dirname`
+
+**Muss gesetzt sein (required)**
+
+Die `PATH` Konstante muss definiert sein. Wird benötigt für den Aufruf des Adapters über die Plugins.
+
+```javascript
+export const PATH = __dirname;
+```
+
+
 ## Functions
 
-###  `async` getRoutes
+### getRoutes
 
-Ruft asynchron alle Routen ab.
+Ruft `asynchron` alle Routen ab.
 
-**Return** 
+**Arguments:**
+
+| Name           | Type            | Bschreibung                                   |
+| -------------- | --------------- | --------------------------------------------- |
+| locales        | `Array<String>` | Verwendete Sprachen Bsp.: ['de', 'en', …]     |
+| adapterOptions | `Object`        | Über `nuxt-config` definierte Adapter-Options |
+
+**Return:**
+
 ```json
 [
   {
     "path": "/index",
-    "data": {
-      "de": {
-        "url": {
-          "path": "/"
-        },
-        "title": "Startseite",
-        "components": [
-          {
-            "component": "...",
-            "data": { ... }
-          },
-          ...
-        ]
-      },
-      "en": {
-        "url": {
-          "path": "/"
-        },
-        "title": "Home",
-        "components": [
-          {
-            "component": "",
-            "data": { ... }
-          },
-          ...
-        ]
-      }
+    "data" : {
+      "de": {…},
+      "en" : {…}
     }
   },
-  {
-    "path": "/contact",
-    "data": {
-      "de": {
-        "url": {
-          "path": "/kontakt"
-        },
-        "title": "Kontakt",
-        "components": [
-          {
-            "component": "",
-            "data": { ... }
-          },
-          ...
-        ]
-      },
-      "en": {
-        "url": {
-          "path": "/contact"
-        },
-        "title": "Contact",
-        "components": [
-          {
-            "component": "",
-            "data": { ... }
-          },
-          ...
-        ]
-      }
-    }
-  }
+  …
 ]
 ```
 
+
+### getRoute
+
+Ruft `asynchron` eine einzelne Route ab.
+
+- Im `development`-Mod aktiv.
+
+**Arguments:**
+
+| Name           | Type            | Bschreibung                               |
+| -------------- | --------------- | ----------------------------------------- |
+| route          | `Object`        | Vue-Router Route                          |
+| path           | `String`        | Router Path without locale prefix (`/en`) |
+| locale         | `String`        | Current locale (`de`)                     |
+| locales        | `Array<String>` | Verwendete Sprachen Bsp.: ['de', 'en', …] |
+| adapterOptions | `Object`        | Adapter-Options from `nuxt-config`        |
+
+
+**Return:**
+
+```json
+{
+  "path": "/index",
+  "data" : {
+    "de": {…},
+    "en" : {…}
+  }
+}
+```
+
+### getLayout
+
+Ruft `asynchron` die Layout-Daten ab.
+
+- Wird im `nuxtServerInit` des Stores verwendet um beim Rendervorgang initial Layout spezifische Daten zu laden. (Beispiel: Header, Footer or Cookie-Notification)
+
+**Arguments:**
+
+| Name           | Type            | Bschreibung                               |
+| -------------- | --------------- | ----------------------------------------- |
+| route          | `Object`        | Vue-Router Route                          |
+| path           | `String`        | Router Path without locale prefix (`/en`) |
+| locale         | `String`        | Current locale (`de`)                     |
+| locales        | `Array<String>` | Verwendete Sprachen Bsp.: ['de', 'en', …] |
+| adapterOptions | `Object`        | Adapter-Options from `nuxt-config`        |
+
+**Return:**
+
+```json
+{
+    "de": {…},
+    "en" : {…}
+}
+```
+
+---
 
 ## Route
 
 Eine Route kann aus verschiedenen Sprachen bestehen.
 
 Für jede Sprache müssen folgende Eigenschaften vorhanden sein.
-
 
 **Gesamt Route**
 

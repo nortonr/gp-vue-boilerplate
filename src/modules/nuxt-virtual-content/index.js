@@ -74,6 +74,7 @@ module.exports = function (options) {
    */
 
   const plugins = [
+    { name: 'options' },
     { name: 'layout', mode: 'server' },
     { name: 'content' }
   ];

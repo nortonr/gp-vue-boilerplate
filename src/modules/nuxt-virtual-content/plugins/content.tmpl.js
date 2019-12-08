@@ -2,8 +2,6 @@
 import { getRoute, getLayout } from '<%= options.adapterPath %>';
 <% } %>
 
-import Vue from 'vue';
-
 export default (ctx) => {
   <% if (!options.isDev || options.dev && options.isDev) { %>
     ctx.$getVirtualContent = () => {
@@ -18,32 +16,19 @@ export default (ctx) => {
     };
   <% } else { %>
     ctx.$getVirtualContent = () => {
-      const locales = ctx.app.i18n.locales.map(locale => locale.code);
-      const locale = ctx.app.i18n.locale;
-      return getRoute(ctx.$getVirtualContentOptions()).then(route => {
+      const options = ctx.$getVirtualContentOptions();
+      return getRoute(options).then(route => {
         if (!route) {
-          throw new Error(`route not found "${ctx.route.path}"`);
+          throw new Error(`route not found "${options.route.path}"`);
         }
         if ('routeParams' in route) {
           // set other locale slugs for languageSwitch
           ctx.store.dispatch('i18n/setRouteParams', route.routeParams);
         }
-        return route.data[String(locale)];
+        return route.data[String(options.locale)];
       });
     };
   <% } %>
-    Vue.prototype.$getVirtualContentOptions = ctx.$getVirtualContentOptions = () => {
-      const locales = ctx.app.i18n.locales.map(locale => locale.code);
-      const locale = ctx.app.i18n.locale;
-      return Object.assign({
-        route: ctx.route,
-        path: ctx.route.path.replace(RegExp(`^\\/${locale}`), '/'),
-        locale,
-        locales
-        /* eslint-disable-line */
-      }, <%= JSON.stringify(options) %>
-      );
-    };
 };
 
 function getRoutePath (app) {
