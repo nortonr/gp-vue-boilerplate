@@ -171,11 +171,11 @@ module.exports = {
           locales: [
             {
               code: 'en',
-              iso: 'en-US'
+              iso: 'en'
             },
             {
               code: 'de',
-              iso: 'de-DE'
+              iso: 'de'
             }
           ],
           parsePages: true,
