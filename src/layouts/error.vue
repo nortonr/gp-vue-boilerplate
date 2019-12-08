@@ -1,7 +1,7 @@
 
 <template>
   <div class="content">
-    <gp-organism-stage-picture v-bind="stagePicture" />
+    <gp-organism-stage-image v-bind="StageImage" />
     <gp-organism-text v-bind="text" />
   </div>
 </template>
@@ -10,7 +10,7 @@
 
 export default {
   components: {
-    gpOrganismStagePicture: () => import('@/components/organisms/StagePicture'),
+    gpOrganismStageImage: () => import('@/components/organisms/StageImage'),
     gpOrganismText: () => import('@/components/organisms/Text')
   },
 
@@ -31,7 +31,7 @@ export default {
 
   computed: {
 
-    stagePicture () {
+    StageImage () {
       return {
         'picture': {
           'sourceClientOnly': false,

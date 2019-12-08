@@ -29,7 +29,7 @@
         }
       },
       {
-        "component": "Picture",
+        "component": "Image",
         "data": {
           "picture": {
             "sources": [
@@ -93,7 +93,7 @@
         }
       },
       {
-        "component": "Picture",
+        "component": "Image",
         "data": {
           "picture": {
             "sources": [

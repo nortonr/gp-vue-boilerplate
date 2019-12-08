@@ -12,24 +12,10 @@
 
 <script>
 
-import { getRoute } from './index';
-
 export default {
 
-  asyncData ({ app, route, store, error }) {
-    const locale = app.i18n.locale;
-    return getRoute(route.path.replace(RegExp(`^\\/${locale}`), ''), locale).then(route => {
-      if (!route) {
-        throw new Error(`path not found "${route.path}"`);
-      }
-      if ('routeParams' in route) {
-        // set other locale slugs for languageSwitch
-        store.dispatch('i18n/setRouteParams', route.routeParams);
-      }
-      return route.data[String(locale)];
-    }).catch((err) => {
-      error({ statusCode: err.code, message: err.message });
-    });
+  asyncData ({ $getVirtualContent }) {
+    return $getVirtualContent();
   },
 
   data: function () {

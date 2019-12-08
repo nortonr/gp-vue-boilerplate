@@ -6,7 +6,7 @@
     "title": "Home",
     "components": [
       {
-        "component": "StagePicture",
+        "component": "StageImage",
         "data": {
           "picture": {
             "sourceClientOnly": false,
@@ -115,7 +115,7 @@
         }
       },
       {
-        "component": "Picture",
+        "component": "Image",
         "data": {
           "picture": {
             "sources": [
@@ -180,7 +180,7 @@
     "title": "Home",
     "components": [
       {
-        "component": "StagePicture",
+        "component": "StageImage",
         "data": {
           "picture": {
             "sourceClientOnly": false,
@@ -289,7 +289,7 @@
         }
       },
       {
-        "component": "Picture",
+        "component": "Image",
         "data": {
           "picture": {
             "sources": [

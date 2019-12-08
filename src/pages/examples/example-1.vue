@@ -1,16 +1,16 @@
 <template>
   <div>
-    <gp-organism-stage-picture v-bind="stagePicture" />
+    <gp-organism-stage-image v-bind="StageImage" />
     <gp-organism-text v-bind="text" />
   </div>
 </template>
 
 <script>
 
-import gpOrganismStagePicture from '@/components/organisms/StagePicture';
+import gpOrganismStageImage from '@/components/organisms/StageImage';
 import gpOrganismText from '@/components/organisms/Text';
 export default {
-  components: { gpOrganismStagePicture, gpOrganismText },
+  components: { gpOrganismStageImage, gpOrganismText },
 
   nuxtI18n: {
     paths: {
@@ -23,7 +23,7 @@ export default {
     return {
       title: 'Example 1',
 
-      stagePicture: {
+      StageImage: {
         picture: {
           sourceClientOnly: false,
           sources: [

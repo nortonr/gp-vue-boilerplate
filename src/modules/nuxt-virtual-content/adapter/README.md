@@ -13,7 +13,9 @@ Ruft asynchron alle Routen ab.
     "path": "/index",
     "data": {
       "de": {
-        "url": "/",
+        "url": {
+          "path": "/"
+        },
         "title": "Startseite",
         "components": [
           {
@@ -24,7 +26,9 @@ Ruft asynchron alle Routen ab.
         ]
       },
       "en": {
-        "url": "/",
+        "url": {
+          "path": "/"
+        },
         "title": "Home",
         "components": [
           {
@@ -40,7 +44,9 @@ Ruft asynchron alle Routen ab.
     "path": "/contact",
     "data": {
       "de": {
-        "url": "/kontakt",
+        "url": {
+          "path": "/kontakt"
+        },
         "title": "Kontakt",
         "components": [
           {
@@ -51,7 +57,9 @@ Ruft asynchron alle Routen ab.
         ]
       },
       "en": {
-        "url": "/contact",
+        "url": {
+          "path": "/contact"
+        },
         "title": "Contact",
         "components": [
           {
@@ -85,18 +93,20 @@ Für jede Sprache müssen folgende Eigenschaften vorhanden sein.
 
 **Einzelne Sprache**
 
-| Eigenschaft  | Beschreibung       |
-| ------------ | ------------------ |
-| `url`        | Seiten Url         |
-| `title`      | Seiten Title       |
-| `components` | Seiten Componenten |
+| Eigenschaft  | Beschreibung                                              |
+| ------------ | --------------------------------------------------------- |
+| `url`        | Routen-Objekt zum abfragen der `localPath` Methode (i18n) |
+| `title`      | Seiten Title                                              |
+| `components` | Seiten Componenten                                        |
 
 ```json
 {
   "path": "/contact",
   "data": {
     "de": {
-      "url": "/kontakt",
+      "url": {
+        "path": "/kontakt"
+      },
       "title": "Kontakt",
       "components": [
         {
@@ -107,7 +117,9 @@ Für jede Sprache müssen folgende Eigenschaften vorhanden sein.
       ]
     },
     "en": {
-      "url": "/contact",
+      "url": {
+        "path": "/contact"
+      },
       "title": "Contact",
       "components": [
         {

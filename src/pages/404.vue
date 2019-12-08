@@ -1,6 +1,6 @@
 <template>
   <div class="error">
-    <gp-organism-stage-picture v-bind="stagePicture" />
+    <gp-organism-stage-image v-bind="StageImage" />
     <gp-organism-text v-bind="text" />
   </div>
 </template>
@@ -10,7 +10,7 @@
 export default {
 
   components: {
-    gpOrganismStagePicture: () => import('@/components/organisms/StagePicture'),
+    gpOrganismStageImage: () => import('@/components/organisms/StageImage'),
     gpOrganismText: () => import('@/components/organisms/Text')
   },
 
@@ -26,7 +26,7 @@ export default {
   data: function () {
     return {
 
-      stagePicture: {
+      StageImage: {
         picture: {
           sourceClientOnly: false,
           sources: [

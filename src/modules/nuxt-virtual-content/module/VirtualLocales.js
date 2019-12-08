@@ -49,7 +49,7 @@ function onCompilation (virtualModule) {
           .replace(/(.*)\/:.*?$/, '$1');
 
         virtualModule.writeModule(
-          path.join('src/virtual-locales', locale, `${name}.json`),
+          path.join('src/virtual-locales', 'pages', locale, `${name}.json`),
           JSON.stringify(data)
         );
 

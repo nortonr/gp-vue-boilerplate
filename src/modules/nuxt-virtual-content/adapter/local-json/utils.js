@@ -1,8 +1,11 @@
 const path = require('upath');
 
-const LOCALES_PATH = path.resolve(process.cwd(), 'src/locales');
-function getLocalesContext () {
-  return require.context('@/locales', true, /\.json$/);
+const LOCALES_PATH = path.resolve(process.cwd(), 'src/locales/pages');
+function getPageLocalesContext () {
+  return require.context('@/locales/pages', true, /\.json$/);
+}
+export function getLayoutData () {
+  return require('@/locales/layout');
 }
 
 // #########################################################
@@ -42,7 +45,7 @@ function getFileContent (filepath, rootPath) {
 }
 
 export function getPages () {
-  const requireContext = getLocalesContext();
+  const requireContext = getPageLocalesContext();
   return requireContext.keys().map(path => {
     const data = requireContext(path);
     return Object.keys(data).reduce((result, locale) => {

@@ -49,7 +49,6 @@ export function getShortName (prefix, component) {
 
 // eslint-disable-next-line complexity
 export async function cacheRoutes (options) {
-  console.log('options', options);
   let cacheEmpty = false;
   let routes = await getCachedRoutes();
   cacheEmpty = !options.routesCache || options.isDev && options.routesCache && !routes || process.env.npm_config_virtual_content_clear_cache;

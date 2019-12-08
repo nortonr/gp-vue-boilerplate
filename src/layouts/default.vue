@@ -97,16 +97,16 @@ export default {
       return this.$store.getters['layout/preventScrolling'];
     },
     pageHeader () {
-      return this.$t('header');
+      return this.$store.getters['layout/data'][this.$i18n.locale].pageHeader;
     },
     pageMenu () {
-      return this.$t('menu');
+      return this.$store.getters['layout/data'][this.$i18n.locale].pageMenu;
     },
     pageMenuButton () {
-      return this.$t('menuButton');
+      return this.$store.getters['layout/data'][this.$i18n.locale].pageMenuButton;
     },
     pageFooter () {
-      return this.$t('footer');
+      return this.$store.getters['layout/data'][this.$i18n.locale].pageFooter;
     }
   },
 

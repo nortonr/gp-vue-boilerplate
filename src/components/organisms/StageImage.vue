@@ -1,10 +1,13 @@
 <template>
   <gp-layout-default-container
-    class="gp-organism-picture"
+    class="gp-organism-stage-picture"
     v-bind="options"
   >
-    <template v-slot:container>
-      <gp-atom-picture v-bind="picture" />
+    <template slot="background">
+      <gp-atom-picture
+        v-if="picture"
+        v-bind="picture"
+      />
     </template>
   </gp-layout-default-container>
 </template>
@@ -24,7 +27,7 @@ export default {
     options: {
       type: Object,
       default () {
-        return null;
+        return {};
       }
     },
 
@@ -46,27 +49,31 @@ export default {
     }
 
   }
-
 };
 </script>
 
 <style lang="postcss">
-.gp-organism-picture {
+.gp-organism-stage-picture {
   position: relative;
   width: 100%;
 
-  &::before {
+  & picture {
+    position: relative;
     display: block;
-    width: 100%;
-    padding-top: calc(9 / 16 * 100%);
-    content: "";
-  }
 
-  & img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+    &::before {
+      display: block;
+      width: 100%;
+      padding-top: calc(9 / 16 * 100%);
+      content: "";
+    }
+
+    & img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
   }
 }
 </style>

@@ -1,13 +1,10 @@
 <template>
   <gp-layout-default-container
-    class="gp-organism-stage-picture"
+    class="gp-organism-image"
     v-bind="options"
   >
-    <template slot="background">
-      <gp-atom-picture
-        v-if="picture"
-        v-bind="picture"
-      />
+    <template v-slot:container>
+      <gp-atom-picture v-bind="picture" />
     </template>
   </gp-layout-default-container>
 </template>
@@ -27,7 +24,7 @@ export default {
     options: {
       type: Object,
       default () {
-        return {};
+        return null;
       }
     },
 
@@ -37,12 +34,6 @@ export default {
       default () {
         return {
           sources: [
-            // { 'media': 'default', 'src': 'img/sample-a-16-9/retina/824x464.jpg' },
-            // { 'media': 'xs', 'src': 'img/sample-a-16-9/retina/1536x864.jpg' },
-            // { 'media': 'sm', 'src': 'img/sample-a-16-9/retina/1984x1116.jpg' },
-            // { 'media': 'md', 'src': 'img/sample-a-16-9/retina/2400x1350.jpg' },
-            // { 'media': 'lg', 'src': 'img/sample-a-16-9/retina/3200x1800.jpg' },
-            // { 'media': 'xl', 'src': 'img/sample-a-16-9/retina/3840x2160.jpg' }
             { 'media': 'default', 'srcset': 'img/sample-a-16-9/412x232.jpg' },
             { 'media': 'xs', 'srcset': 'img/sample-a-16-9/768x432.jpg' },
             { 'media': 'sm', 'srcset': 'img/sample-a-16-9/992x558.jpg' },
@@ -55,31 +46,27 @@ export default {
     }
 
   }
+
 };
 </script>
 
 <style lang="postcss">
-.gp-organism-stage-picture {
+.gp-organism-image {
   position: relative;
   width: 100%;
 
-  & picture {
-    position: relative;
+  &::before {
     display: block;
+    width: 100%;
+    padding-top: calc(9 / 16 * 100%);
+    content: "";
+  }
 
-    &::before {
-      display: block;
-      width: 100%;
-      padding-top: calc(9 / 16 * 100%);
-      content: "";
-    }
-
-    & img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-    }
+  & img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
   }
 }
 </style>

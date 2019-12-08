@@ -72,14 +72,13 @@ module.exports = function (options) {
   /**
    * add context plugin
    */
-  this.addPlugin({
-    src: path.resolve(__dirname, 'plugin.tmpl'),
-    options: {
-      dev: options.dev,
-      isDev: options.isDev,
-      adapterOptions: options.adapterOptions
-    }
-  });
+
+  const plugins = [
+    { name: 'layout', mode: 'server' },
+    { name: 'content' }
+  ];
+
+  addPlugins(this, options, plugins);
 
   if (!options.dev && options.isDev) {
     logWarn('is disabled in development mode');
@@ -95,6 +94,26 @@ module.exports = function (options) {
   });
 
 };
+
+/**
+ * @param Array plugins
+ * @param ModuleContainer moduleScope
+ */
+function addPlugins (moduleScope, options, plugins) {
+  const pluginOptions = {
+    adapterPath: options.adapter.PATH,
+    dev: options.dev,
+    isDev: options.isDev,
+    adapterOptions: options.adapterOptions
+  };
+  plugins.forEach(({ name, mode }) => {
+    moduleScope.addPlugin({
+      src: path.resolve(__dirname, `plugins/${name}.tmpl.js`),
+      mode,
+      options: pluginOptions
+    });
+  });
+}
 
 /**
  * @param Object options
