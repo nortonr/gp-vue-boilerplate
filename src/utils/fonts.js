@@ -23,21 +23,25 @@ function linkFeatureDetection () {
   return false;
 }
 
-function prefetchFonts (preloads, classList = []) {
+function prefetchFonts (preloads, classList = [], readyClassList) {
   let range = preloads.splice(0, Math.min(2, preloads.length));
   (global.requestIdleCallback || global.setTimeout)(() => {
-    document.documentElement.classList.add(...classList.flat());
+    if (readyClassList) {
+      document.documentElement.classList.add(...classList.flat());
+    }
     if (range.length) {
       Promise.all(range.map((item) => {
         return prefetchFont(item);
       }))
         .then((list) => {
-          prefetchFonts(preloads, list);
+          prefetchFonts(preloads, list, list.concat(readyClassList));
           return;
         })
         .catch((e) => {
           throw e;
         });
+    } else {
+      document.documentElement.classList.add(...readyClassList.flat());
     }
   });
 }
@@ -64,10 +68,4 @@ function getRegisteredFontClasses (options) {
     `font_${options.set}`,
     `font_${options.set}_${options.weight}`
   ];
-  // return document.fonts.load(`${options.width} 1em "${options.family}"`)
-  //   .then(() => {
-  //     return options.class;
-  //   }).catch((e) => {
-  //     throw e;
-  //   });
 }

@@ -1,150 +1,168 @@
 {
   "de": {
-    "pageHeader": {},
-    "pageMenu": {
-      "navigation": [
-        {
-          "title": "Home",
-          "url": {
-            "path": "/"
-          }
-        },
-        {
-          "title": "Über uns",
-          "url": {
-            "path": "/ueber-uns"
-          }
-        },
-        {
-          "title": "Projekte",
-          "url": {
-            "path": "/projekte"
+    "openGraph": {
+      "title": "Grabarz & Partner - Boilerplate",
+      "url": "/",
+      "image": "img/open-graph/image.png",
+      "image_secure_url": "img/open-graph/image.png",
+      "image_type": "image/png"
+    },
+    "components": {
+      "pageHeader": {},
+      "pageMenu": {
+        "navigation": [
+          {
+            "title": "Home",
+            "url": {
+              "path": "/"
+            }
           },
-          "childrens": [
-            {
-              "title": "Projekt 1",
-              "url": {
-                "path": "/projekte/projekt-1"
-              }
+          {
+            "title": "Über uns",
+            "url": {
+              "path": "/ueber-uns"
+            }
+          },
+          {
+            "title": "Projekte",
+            "url": {
+              "path": "/projekte"
             },
-            {
-              "title": "Projekt 2",
-              "url": {
-                "path": "/projekte/projekt-2"
+            "childrens": [
+              {
+                "title": "Projekt 1",
+                "url": {
+                  "path": "/projekte/projekt-1"
+                }
+              },
+              {
+                "title": "Projekt 2",
+                "url": {
+                  "path": "/projekte/projekt-2"
+                }
               }
+            ]
+          },
+          {
+            "title": "Beispiele",
+            "url": "examples",
+            "childrens": [
+              {
+                "title": "Beispiel 1",
+                "url": "examples-example-1"
+              }
+            ]
+          }
+        ]
+      },
+      "pageMenuButton": {
+        "label": "Menu Öffnen/Schließen"
+      },
+      "pageFooter": {
+        "navigation": [
+          {
+            "title": "Kontakt",
+            "url": {
+              "path": "/kontatk"
             }
-          ]
-        },
-        {
-          "title": "Beispiele",
-          "url": "examples",
-          "childrens": [
-            {
-              "title": "Beispiel 1",
-              "url": "examples-example-1"
+          },
+          {
+            "title": "Nutzungsbedingungen",
+            "url": {
+              "path": "/nutzungsbedingungen"
             }
-          ]
-        }
-      ]
-    },
-    "pageMenuButton": {
-      "label": "Menu Öffnen/Schließen"
-    },
-    "pageFooter": {
-      "navigation": [
-        {
-          "title": "Kontakt",
-          "url": {
-            "path": "/kontatk"
+          },
+          {
+            "title": "Rechtliche Hinweise",
+            "url": {
+              "path": "/rechtliche-hinweise"
+            }
           }
-        },
-        {
-          "title": "Nutzungsbedingungen",
-          "url": {
-            "path": "/nutzungsbedingungen"
-          }
-        },
-        {
-          "title": "Rechtliche Hinweise",
-          "url": {
-            "path": "/rechtliche-hinweise"
-          }
-        }
-      ]
+        ]
+      }
     }
   },
   "en": {
-    "pageHeader": {},
-    "pageMenu": {
-      "navigation": [
-        {
-          "title": "Home",
-          "url": {
-            "path": "/"
-          }
-        },
-        {
-          "title": "About",
-          "url": {
-            "path": "/about"
-          }
-        },
-        {
-          "title": "Projects",
-          "url": {
-            "path": "/projects"
+    "openGraph": {
+      "title": "Grabarz & Partner - Boilerplate",
+      "url": "/",
+      "image": "img/open-graph/image.png",
+      "image_secure_url": "img/open-graph/image.png",
+      "image_type": "image/png"
+    },
+    "components": {
+      "pageHeader": {},
+      "pageMenu": {
+        "navigation": [
+          {
+            "title": "Home",
+            "url": {
+              "path": "/"
+            }
           },
-          "childrens": [
-            {
-              "title": "Project 1",
-              "url": {
-                "path": "/projects/project-1"
-              }
+          {
+            "title": "About",
+            "url": {
+              "path": "/about"
+            }
+          },
+          {
+            "title": "Projects",
+            "url": {
+              "path": "/projects"
             },
-            {
-              "title": "Project 2",
-              "url": {
-                "path": "/projects/project-2"
+            "childrens": [
+              {
+                "title": "Project 1",
+                "url": {
+                  "path": "/projects/project-1"
+                }
+              },
+              {
+                "title": "Project 2",
+                "url": {
+                  "path": "/projects/project-2"
+                }
               }
+            ]
+          },
+          {
+            "title": "Examples",
+            "url": "examples",
+            "childrens": [
+              {
+                "title": "Example 1",
+                "url": "examples-example-1"
+              }
+            ]
+          }
+        ]
+      },
+      "pageMenuButton": {
+        "label": "Menu Open/Close"
+      },
+      "pageFooter": {
+        "navigation": [
+          {
+            "title": "Contact",
+            "url": {
+              "path": "/contact"
             }
-          ]
-        },
-        {
-          "title": "Examples",
-          "url": "examples",
-          "childrens": [
-            {
-              "title": "Example 1",
-              "url": "examples-example-1"
+          },
+          {
+            "title": "Terms of use",
+            "url": {
+              "path": "/terms"
             }
-          ]
-        }
-      ]
-    },
-    "pageMenuButton": {
-      "label": "Menu Open/Close"
-    },
-    "pageFooter": {
-      "navigation": [
-        {
-          "title": "Contact",
-          "url": {
-            "path": "/contact"
+          },
+          {
+            "title": "Legals",
+            "url": {
+              "path": "/legals"
+            }
           }
-        },
-        {
-          "title": "Terms of use",
-          "url": {
-            "path": "/terms"
-          }
-        },
-        {
-          "title": "Legals",
-          "url": {
-            "path": "/legals"
-          }
-        }
-      ]
+        ]
+      }
     }
   }
 }

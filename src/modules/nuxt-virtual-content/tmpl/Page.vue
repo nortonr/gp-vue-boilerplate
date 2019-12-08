@@ -12,8 +12,6 @@
 
 <script>
 
-import { getOpenGraph } from '@/utils/meta';
-
 import {
   // eslint-disable-next-line no-unused-vars
   hydrateWhenIdle,
@@ -33,12 +31,8 @@ export default {
   },
 
   asyncData ({ $getVirtualContent, error }) {
-
     return $getVirtualContent().then(data => {
       const meta = [].concat((data.meta || []));
-      if ('openGraph' in data) {
-        meta.push(...getOpenGraph(data.openGraph));
-      }
       return {
         title: data.title,
         meta,

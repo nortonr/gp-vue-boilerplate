@@ -1,28 +1,27 @@
 <template>
   <div>
     <gp-page-header
-      v-bind="pageHeader"
+      v-bind="layoutComponents.pageHeader"
       sticky
     />
     <gp-page-menu
       ref="pageMenu"
-      v-bind="pageMenu"
+      v-bind="layoutComponents.pageMenu"
       :opened="!preventMenuOpened"
     />
     <gp-page-menu-button
-      v-bind="pageMenuButton"
+      v-bind="layoutComponents.pageMenuButton"
       @click.native="onClickMenuButton"
     />
     <main>
       <nuxt />
     </main>
-    <gp-page-footer v-bind="pageFooter" />
+    <gp-page-footer v-bind="layoutComponents.pageFooter" />
   </div>
 </template>
 
 <script>
 
-import { getOpenGraph } from '@/utils/meta';
 import { loadFonts } from '@/utils/fonts';
 import { directionDetectionObserver } from '@/service/viewport';
 
@@ -50,6 +49,7 @@ export default {
 
   data () {
     return {
+
       /**
        * Is deactivated when the menu is activated.
        * Serves as workaround for ignoring the "hydrateOnInteraction" when changing error.vue (layout) to default.vue (layout).
@@ -96,18 +96,12 @@ export default {
     preventScrolling: function () {
       return this.$store.getters['layout/preventScrolling'];
     },
-    pageHeader () {
-      return this.$store.getters['layout/data'][this.$i18n.locale].pageHeader;
+    layoutMeta () {
+      return this.$store.getters['layout/data'][this.$i18n.locale].meta;
     },
-    pageMenu () {
-      return this.$store.getters['layout/data'][this.$i18n.locale].pageMenu;
+    layoutComponents () {
+      return this.$store.getters['layout/data'][this.$i18n.locale].components;
     },
-    pageMenuButton () {
-      return this.$store.getters['layout/data'][this.$i18n.locale].pageMenuButton;
-    },
-    pageFooter () {
-      return this.$store.getters['layout/data'][this.$i18n.locale].pageFooter;
-    }
   },
 
   watch: {
@@ -136,6 +130,7 @@ export default {
     });
 
   },
+
   destroyed () {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
   },
@@ -148,7 +143,6 @@ export default {
         this.$store.dispatch('layout/toggleDirection', value > 0);
       }
     },
-
     onClickMenuButton () {
       this.preventMenuOpened = false;
       this.$refs.pageMenu.$el.dispatchEvent(new CustomEvent('hydrate'));
@@ -163,7 +157,7 @@ export default {
     };
 
     const seo = this.$nuxtI18nSeo();
-    const meta = [].concat(getOpenGraph(), seo.meta);
+    const meta = [].concat(seo.meta, this.layoutMeta);
 
     return {
       htmlAttrs: seo.htmlAttrs,

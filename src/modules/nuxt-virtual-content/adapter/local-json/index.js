@@ -9,7 +9,8 @@ export function getRoutes () {
 }
 
 export async function getRoute ({ path, locale }) {
-  return utils.getPages().find(page => page.matches.find(match => match.locale === locale && match.url === path));
+  const pages = await utils.getPages();
+  return pages.find(page => page.matches.find(match => match.locale === locale && match.url === path));
 }
 
 export async function getLayout () {
