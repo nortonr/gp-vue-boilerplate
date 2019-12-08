@@ -12,7 +12,6 @@ export default (ctx) => {
         .replace(RegExp(`^/${app.i18n.locale}`), '')
         .replace(/^\/([^?.#]*)[\\/?#]{0,1}[^\\/]*$/, '$1')
         .replace(/\/index|\/$/, '') || 'index';
-      console.log(path)
       return import(/* webpackMode: "lazy" */`@/virtual-locales/pages/${app.i18n.locale}/${path}.json`).catch(err => {
         ctx.error({ statusCode: err.code, message: `local json file not found\n${err.message}` });
       });

@@ -101,7 +101,7 @@ module.exports = function (options) {
  */
 function addPlugins (moduleScope, options, plugins) {
   const pluginOptions = {
-    adapterPath: options.adapter.PATH,
+    adapterPath: path.normalize(options.adapter.PATH),
     dev: options.dev,
     isDev: options.isDev,
     adapterOptions: options.adapterOptions
