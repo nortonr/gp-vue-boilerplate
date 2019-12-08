@@ -1,18 +1,44 @@
 export function loadFonts () {
   var preloads = [];
+
   if (navigator.connection && (navigator.connection.effectiveType === 'slow-2g' || navigator.connection.effectiveType === '2g')) {
-    preloads = document.querySelectorAll('link[rel=\'delay-prefetch\'][data-required=\'true\']');
-  } else {
-    preloads = document.querySelectorAll('link[rel=\'delay-prefetch\']');
+    return;
   }
 
-  if (linkFeatureDetection()) {
-    prefetchFonts(Array.from(preloads));
-  } else {
-    // not support link rel prefetch
-    const classList = Array.from(preloads).reduce((result, preload) => result.concat(getRegisteredFontClasses(preload.dataset)), []);
-    document.documentElement.classList.add(...classList);
+  preloads = document.querySelectorAll('link[rel=\'delay-prefetch\']');
+
+  if (preloads.length) {
+    if (linkFeatureDetection()) {
+      prefetchFonts(Array.from(preloads));
+    } else {
+      // not support link rel prefetch
+      const classList = Array.from(preloads).reduce((result, preload) => result.concat(getRegisteredFontClasses(preload.dataset)), []);
+      document.documentElement.classList.add(...classList);
+    }
   }
+}
+
+export function fontsToLinks (fonts, pattern) {
+  pattern = Object.assign({
+    as: 'font',
+    type: 'font/woff2',
+    crossorigin: 'anonymous'
+  }, pattern);
+  return fonts.preload.map((font) => {
+    return Object.assign(font, pattern);
+  });
+}
+
+export function prepareFonts (fonts) {
+  const preload = fonts.map(font => {
+    if (font.rel === 'preload') {
+      font.onload = 'var options = event.target.dataset; document.documentElement.classList.add("font_" + options.set, "font_" + options.set + "_" + options.weight);';
+    }
+    return font;
+  });
+  return {
+    preload
+  };
 }
 
 function linkFeatureDetection () {
@@ -23,25 +49,22 @@ function linkFeatureDetection () {
   return false;
 }
 
-function prefetchFonts (preloads, classList = [], readyClassList) {
+function prefetchFonts (preloads, classList = []) {
   let range = preloads.splice(0, Math.min(2, preloads.length));
   (global.requestIdleCallback || global.setTimeout)(() => {
-    if (readyClassList) {
-      document.documentElement.classList.add(...classList.flat());
-    }
     if (range.length) {
       Promise.all(range.map((item) => {
         return prefetchFont(item);
       }))
         .then((list) => {
-          prefetchFonts(preloads, list, list.concat(readyClassList));
+          prefetchFonts(preloads, classList.concat(list));
           return;
         })
         .catch((e) => {
           throw e;
         });
     } else {
-      document.documentElement.classList.add(...readyClassList.flat());
+      document.documentElement.classList.add(...classList.flat());
     }
   });
 }
