@@ -23,6 +23,7 @@
   "scripts": {
     "test": "npm run lint",
     "dev": "nuxt",
+    "dev-storyblok": "npm run dev --base=/pages/",
     "build": "nuxt build",
     "static": "nuxt generate",
     "static:now": "npm run static && cp now.json dist/website && cd dist/website/ && now",
@@ -114,6 +115,7 @@
     "nuxt-polyfill": "^1.0.3",
     "rxjs": "^6.5.3",
     "snyk": "^1.250.0",
+    "storyblok-js-client": "^2.0.10",
     "upath": "^1.2.0",
     "verge": "^1.10.2",
     "vue-lazy-hydration": "^1.0.0-beta.9",

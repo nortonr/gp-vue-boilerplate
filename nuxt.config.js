@@ -160,6 +160,10 @@ module.exports = {
         virtualPages: false,
         template: false, // false -> Default Template
         adapter: require('./src/modules/nuxt-virtual-content/adapter/local-json'),
+        // adapter: require('./src/modules/nuxt-virtual-content/adapter/storyblok'),
+        // adapterOptions: {
+        //   accessToken: '2rudyPIpd1oB4feReF9CWQtt'
+        // },
 
         ignoreRoutes: [
           'index',
