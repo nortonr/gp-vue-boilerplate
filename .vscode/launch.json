@@ -4,6 +4,45 @@
     {
       "type": "node",
       "request": "launch",
+      "name": "Debug getRoute (storyblok)",
+      "runtimeVersion": "12.1.0",
+      "runtimeArgs": [
+        "-r",
+        "esm",
+        "--inspect"
+      ],
+      "program": "${workspaceFolder}/src/modules/nuxt-virtual-content/adapter/storyblok/tests/getRoute.js",
+      "outputCapture": "std"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug getRoutes (storyblok)",
+      "runtimeVersion": "12.1.0",
+      "runtimeArgs": [
+        "-r",
+        "esm",
+        "--inspect"
+      ],
+      "program": "${workspaceFolder}/src/modules/nuxt-virtual-content/adapter/storyblok/tests/getRoutes.js",
+      "outputCapture": "std"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug getLayout (storyblok)",
+      "runtimeVersion": "12.1.0",
+      "runtimeArgs": [
+        "-r",
+        "esm",
+        "--inspect"
+      ],
+      "program": "${workspaceFolder}/src/modules/nuxt-virtual-content/adapter/storyblok/tests/getLayout.js",
+      "outputCapture": "std"
+    },
+    {
+      "type": "node",
+      "request": "launch",
       "name": "Debug",
       "runtimeVersion": "12.1.0",
       "runtimeArgs": [
