@@ -48,7 +48,7 @@
       }, 'h2')
     },
     overline: {
-      default: text('Overline', 'Lorem ipsum')
+      default: text('Overline', 'Lorem ipsumA')
     },
     headline: {
       default: text('Headline', 'Lorem ipsum')
