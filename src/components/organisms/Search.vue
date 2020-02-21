@@ -1,8 +1,8 @@
 <template>
   <div>
     <search-main :selection="mainSelection" />
-    <search-detail :selection="detailSelection" />
-    <search-detail :selection="subDetailSelection" />
+    <search-detail :selection="childOfDetailSelection" />
+    <search-detail :selection="childOfSubdetailSelection" />
     {{ selectedValues }}
     {{ inputs }}
   </div>
@@ -34,40 +34,46 @@ export default {
   },
 
   computed: {
-    detailSelection () {
-      return this.mainSelection.options.find(option => option.value === this.mainSelection.model.value).child;
+    mainSelected () {
+      return this.getOption(this.mainSelection).inputs || null;
     },
-    subDetailSelection () {
-      if (this.detailSelection) {
-        return this.detailSelection.options.find(option => option.value === this.detailSelection.model.value).child;
-      }
-      return null;
+    detailSelection () {
+      return this.getOption(this.mainSelection);
+    },
+    detailSelected () {
+      return (this.getOption(this.childOfDetailSelection) || { inputs: null }).inputs || null;
+    },
+    subdetailSelection () {
+      return this.getOption(this.childOfDetailSelection);
+    },
+    subdetailSelected () {
+      return (this.getOption(this.childOfSubdetailSelection) || { inputs: null }).inputs || null;
+    },
+    childOfDetailSelection () {
+      return (this.detailSelection || { child: null }).child || { model: null };
+    },
+    childOfSubdetailSelection () {
+      return (this.subdetailSelection || { child: null }).child || { model: null };
     },
     selectedValues () {
       return this.getValues();
     },
     inputs () {
-      if (this.subDetailSelection && this.subDetailSelection.options.find(option => option.value === this.subDetailSelection.model.value).inputs) {
-        return this.subDetailSelection.options.find(option => option.value === this.subDetailSelection.model.value).inputs;
-      }
-      if (this.detailSelection && this.detailSelection.options.find(option => option.value === this.detailSelection.model.value).inputs) {
-        return this.detailSelection.options.find(option => option.value === this.detailSelection.model.value).inputs;
-      }
-      return this.mainSelection.options.find(option => option.value === this.mainSelection.model.value).inputs;
+      return this.subdetailSelected || this.detailSelected || this.mainSelected;
     }
   },
 
   methods: {
+    getOption (selection) {
+      return (selection.options || []).find(option => option.value === selection.model.value);
+    },
+
     getValues () {
       const values = [];
       values.push(this.mainSelection.model);
-      if (this.detailSelection) {
-        values.push(this.detailSelection.model);
-      }
-      if (this.subDetailSelection) {
-        values.push(this.subDetailSelection.model);
-      }
-      return values;
+      values.push(this.childOfDetailSelection.model);
+      values.push(this.childOfSubdetailSelection.model);
+      return values.filter(n => n);
     }
   }
 };

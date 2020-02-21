@@ -1,6 +1,7 @@
 <template>
   <div>
     <drop-down
+      v-if="selection.model"
       :options="selection.options"
       :model="selection.model"
     />
