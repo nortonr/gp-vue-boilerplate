@@ -2,6 +2,10 @@
   "title": "Home",
   "components": [
     {
+      "component": "Search",
+      "data": {}
+    },
+    {
       "component": "StagePicture",
       "data": {
         "picture": {

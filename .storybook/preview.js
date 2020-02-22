@@ -5,6 +5,7 @@ import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport';
 import { withA11y } from '@storybook/addon-a11y';
 import { withInfo, setDefaults } from 'storybook-addon-vue-info';
 import { action, configureActions } from '@storybook/addon-actions';
+import StoryRouter from 'storybook-vue-router';
 
 import './prepare';
 
@@ -29,6 +30,7 @@ addParameters({
 });
 
 addDecorator(withInfo({}));
+addDecorator(StoryRouter())
 
 setDefaults({
   header: true,

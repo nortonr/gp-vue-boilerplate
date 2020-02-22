@@ -1,10 +1,18 @@
 <template>
   <div>
-    <search-main :selection="mainSelection" />
-    <search-detail :selection="childOfDetailSelection" />
-    <search-detail :selection="childOfSubdetailSelection" />
-    {{ selectedValues }}
-    {{ inputs }}
+    <search-main :selection="getMatrixByDepth(0)" />
+    <search-detail :selection="getMatrixByDepth(1)" />
+    <search-detail :selection="getMatrixByDepth(2)" />
+    {{ getValues() }}
+    {{ getInputs() }}
+    <br>
+    <nuxt-link to="/?first=b&second=b1&third=b1_a">
+      Test B1 A
+    </nuxt-link>
+    <br>
+    <nuxt-link to="/?first=c&second=c1">
+      Test C1
+    </nuxt-link>
   </div>
 </template>
 
@@ -19,7 +27,8 @@
 <script>
 import SearchMain from '@/components/molecules/search/Main';
 import SearchDetail from '@/components/molecules/search/Detail';
-import formMatrix from '@/service/formMatrix';
+import matrix from '@/service/formMatrix';
+import formMatrix from '@/utils/formMatrix';
 
 export default {
   components: {
@@ -29,53 +38,54 @@ export default {
 
   data () {
     return {
-      mainSelection: formMatrix
+      matrix: formMatrix.updateByQuery(matrix, { ...this.$route.query })
     };
   },
 
-  computed: {
-    mainSelected () {
-      return this.getOption(this.mainSelection).inputs || null;
+  watch: {
+    $route (to, from) {
+      console.log('AJA', to.query);
+      formMatrix.updateByQuery(this.matrix, { ...to.query } || {});
     },
-    detailSelection () {
-      return this.getOption(this.mainSelection);
-    },
-    detailSelected () {
-      return (this.getOption(this.childOfDetailSelection) || { inputs: null }).inputs || null;
-    },
-    subdetailSelection () {
-      return this.getOption(this.childOfDetailSelection);
-    },
-    subdetailSelected () {
-      return (this.getOption(this.childOfSubdetailSelection) || { inputs: null }).inputs || null;
-    },
-    childOfDetailSelection () {
-      return (this.detailSelection || { child: null }).child || { model: null };
-    },
-    childOfSubdetailSelection () {
-      return (this.subdetailSelection || { child: null }).child || { model: null };
-    },
-    selectedValues () {
-      return this.getValues();
-    },
-    inputs () {
-      return this.subdetailSelected || this.detailSelected || this.mainSelected;
+    matrix: {
+      deep: true,
+      handler () {
+        const result = this.getValues();
+        if (!Object.compare(this.$route.query, result)) {
+          this.$router.replace({
+            query: result
+          }).catch(() => {
+            console.log('recall same url');
+          });
+        }
+      }
     }
   },
 
   methods: {
-    getOption (selection) {
-      return (selection.options || []).find(option => option.value === selection.model.value);
+    getMatrixByDepth (depth) {
+      return formMatrix.getByDepth(this.matrix, depth);
+    },
+
+    getInputs () {
+      return formMatrix.getInputs(this.matrix);
     },
 
     getValues () {
-      const values = [];
-      values.push(this.mainSelection.model);
-      values.push(this.childOfDetailSelection.model);
-      values.push(this.childOfSubdetailSelection.model);
-      return values.filter(n => n);
+      return formMatrix.getValues(this.matrix);
     }
   }
+};
+
+Object.compare = (a, b) => {
+  const s = o => Object
+    .entries(o)
+    .sort()
+    .map((i) => {
+      if (i[1] instanceof Object) { i[1] = s(i[1]); }
+      return i;
+    });
+  return JSON.stringify(s(a)) === JSON.stringify(s(b));
 };
 </script>
 

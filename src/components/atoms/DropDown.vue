@@ -28,6 +28,19 @@ export default {
         return [];
       }
     }
+  },
+
+  watch: {
+    'model.value' (value) {
+      // console.log(value);
+      // this.$router.replace({ path: '/', query: { [this.model.name]: value } });
+    }
+  },
+
+  mounted () {
+    // console.log(this.$route, Object.assign(this.$route.query, { [this.model.name]: this.model.value }));
+
+    // this.$route.query[this.model.name] = this.model.value;
   }
 };
 </script>

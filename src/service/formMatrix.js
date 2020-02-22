@@ -7,7 +7,7 @@ export default {
     {
       label: 'Option A',
       value: 'a',
-      child: {
+      matrix: {
         model: {
           name: 'second',
           value: 'a3'
@@ -25,7 +25,7 @@ export default {
     {
       label: 'Option B',
       value: 'b',
-      child: {
+      matrix: {
         model: {
           name: 'second',
           value: 'b2'
@@ -34,7 +34,7 @@ export default {
           {
             label: 'Option B1',
             value: 'b1',
-            child: {
+            matrix: {
               model: {
                 name: 'third',
                 value: 'b1_b'
@@ -67,7 +67,7 @@ export default {
           {
             label: 'Option B2',
             value: 'b2',
-            child: {
+            matrix: {
               model: {
                 name: 'third',
                 value: 'b2_b'
@@ -77,7 +77,10 @@ export default {
                 { label: 'Option B2 b', value: 'b2_b' },
                 { label: 'Option B2 c', value: 'b2_c' }
               ]
-            }
+            },
+            inputs: [
+              'color', 'email'
+            ]
           },
           {
             label: 'Option B3',
@@ -92,7 +95,7 @@ export default {
     {
       label: 'Option C',
       value: 'c',
-      child: {
+      matrix: {
         model: {
           name: 'second',
           value: 'c2'
