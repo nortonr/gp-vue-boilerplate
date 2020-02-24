@@ -7,7 +7,7 @@ export default class FormMatrix {
   updateByQuery (query) {
     const q = { ...query };
     updateTreeByQuery(this.data.matrix, q);
-    updateListByQuery(this.getInputs(), q);
+    updateListByQuery(flatInputs(this.getInputs()), q);
     updateListByQuery(this.getCriteria(), q);
   }
 
@@ -16,7 +16,7 @@ export default class FormMatrix {
   }
 
   getInputs () {
-    return mapList(getEntry(this.data.matrix, 'inputs'), this.data.legend.inputs);
+    return mapGroups(getEntry(this.data.matrix, 'inputs'), this.data.legend.inputs);
   }
 
   getCriteria () {
@@ -26,11 +26,22 @@ export default class FormMatrix {
   getValues () {
     return Object.assign(
       getTreeValues(this.data.matrix),
-      getListValues(this.getInputs()),
+      getListValues(flatInputs(this.getInputs())),
       getListValues(this.getCriteria())
     );
   }
 };
+
+function flatInputs (groups) {
+  const list = groups.reduce((result, group) => {
+    return result.concat(group.list);
+  }, []);
+  return [
+    ...new Map(list.map(item => [
+      item.model.name, item
+    ])).values()
+  ];
+}
 
 function updateTreeByQuery (matrix, query) {
   const keys = Object.keys(query);
@@ -67,12 +78,25 @@ function getEntry (matrix, key) {
 }
 
 function mapList (list, legend) {
-  return list.map((input) => {
-    if (typeof input === 'string' || input instanceof String) {
-      return legend.find(item => item.model.name === input);
+  return list.map((item) => {
+    let config = item.config;
+    if (typeof config === 'string' || config instanceof String) {
+      config = legend.find(item => item.model.name === config);
     }
-    return input;
-  }).filter(n => n);
+    return Object.assign({ class: item.class }, config);
+  });
+}
+
+function mapGroups (groups, legend) {
+  return groups.reduce((result, group) => {
+    if (typeof group !== 'string' && !(group instanceof String)) {
+      result.push({
+        class: group.class,
+        list: mapList(group.list, legend)
+      });
+    }
+    return result;
+  }, []);
 }
 
 function getTreeValues (matrix, query = {}) {

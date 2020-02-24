@@ -91,10 +91,42 @@ export default {
           ]
         },
         inputs: [
-          'price_min', 'price_max', 'squaremeter_min', 'squaremeter_max'
+          {
+            class: 'price',
+            list: [
+              {
+                config: 'price_max',
+                class: 'test-class-a'
+              }, {
+                config: 'price_min',
+                class: 'test-class-b'
+              }, {
+                config: 'price_max',
+                class: 'test-class-c'
+              }
+            ]
+          },
+          {
+            class: 'squaremeter',
+            list: [
+              {
+                config: 'squaremeter_min',
+                class: 'test-class-a'
+              }, {
+                config: 'squaremeter_min',
+                class: 'test-class-b'
+              }, {
+                config: 'squaremeter_max',
+                class: 'test-class-c'
+              }
+            ]
+          }
         ],
         criteria: [
-          'choose'
+          {
+            config: 'choose',
+            class: 'test-class'
+          }
         ]
       },
       {
@@ -164,10 +196,42 @@ export default {
           ]
         },
         inputs: [
-          'price_min', 'price_max', 'squaremeter_min', 'squaremeter_max'
+          {
+            class: 'price',
+            list: [
+              {
+                config: 'price_max',
+                class: 'test-class-a'
+              }, {
+                config: 'price_min',
+                class: 'test-class-b'
+              }, {
+                config: 'price_max',
+                class: 'test-class-c'
+              }
+            ]
+          },
+          {
+            class: 'squaremeter',
+            list: [
+              {
+                config: 'squaremeter_min',
+                class: 'test-class-a'
+              }, {
+                config: 'squaremeter_min',
+                class: 'test-class-b'
+              }, {
+                config: 'squaremeter_max',
+                class: 'test-class-c'
+              }
+            ]
+          }
         ],
         criteria: [
-          'choose'
+          {
+            config: 'choose',
+            class: 'test-class'
+          }
         ]
       },
       {
@@ -185,20 +249,84 @@ export default {
           ]
         },
         inputs: [
-          'price_min', 'price_max', 'squaremeter_min', 'squaremeter_max'
+          {
+            class: 'price',
+            list: [
+              {
+                config: 'price_max',
+                class: 'test-class-a'
+              }, {
+                config: 'price_min',
+                class: 'test-class-b'
+              }, {
+                config: 'price_max',
+                class: 'test-class-c'
+              }
+            ]
+          },
+          {
+            class: 'squaremeter',
+            list: [
+              {
+                config: 'squaremeter_min',
+                class: 'test-class-a'
+              }, {
+                config: 'squaremeter_min',
+                class: 'test-class-b'
+              }, {
+                config: 'squaremeter_max',
+                class: 'test-class-c'
+              }
+            ]
+          }
         ],
         criteria: [
-          'choose'
+          {
+            config: 'choose',
+            class: 'test-class'
+          }
         ]
       },
       {
         label: 'Option D',
         value: 'd',
         inputs: [
-          'price_min', 'price_max', 'squaremeter_min', 'squaremeter_max'
+          {
+            class: 'price',
+            list: [
+              {
+                config: 'price_max',
+                class: 'test-class-a'
+              }, {
+                config: 'price_min',
+                class: 'test-class-b'
+              }, {
+                config: 'price_max',
+                class: 'test-class-c'
+              }
+            ]
+          },
+          {
+            class: 'squaremeter',
+            list: [
+              {
+                config: 'squaremeter_min',
+                class: 'test-class-a'
+              }, {
+                config: 'squaremeter_min',
+                class: 'test-class-b'
+              }, {
+                config: 'squaremeter_max',
+                class: 'test-class-c'
+              }
+            ]
+          }
         ],
         criteria: [
-          'choose'
+          {
+            config: 'choose',
+            class: 'test-class'
+          }
         ]
       }
     ]

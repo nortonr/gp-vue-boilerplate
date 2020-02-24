@@ -3,18 +3,24 @@
     <search-main :selection="matrix.getSubmatrixByDepth(0)" />
     <search-detail :selection="matrix.getSubmatrixByDepth(1)" />
     <search-detail :selection="matrix.getSubmatrixByDepth(2)" />
-    {{ matrix.getValues() }}
-    <component
-      :is="item.component"
-      v-for="(item, index) in matrix.getInputs()"
-      :key="index"
-      v-bind="item.options"
-      :model="item.model"
-    />
+    <div
+      v-for="(group, index) in matrix.getInputs()"
+      :key="'group' + index"
+      :class="group.class"
+    >
+      <component
+        :is="input.component"
+        v-for="(input, i) in group.list"
+        :key="'input'+ i"
+        v-bind="input.options"
+        :model="input.model"
+        :class="input.class"
+      />
+    </div>
     <component
       :is="item.component"
       v-for="(item, index) in matrix.getCriteria()"
-      :key="'test'+ index"
+      :key="'criteria'+ index"
       :options="item.options"
       :model="item.model"
     />
@@ -62,7 +68,6 @@ export default {
     matrix: {
       deep: true,
       handler () {
-        console.log('aja');
         const result = this.matrix.getValues();
         if (!Object.compare(this.$route.query, result)) {
           this.$router.replace({
