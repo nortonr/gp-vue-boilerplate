@@ -124,7 +124,9 @@
     "snyk": "1.294.0",
     "upath": "1.2.0",
     "verge": "1.10.2",
-    "vue-lazy-hydration": "1.0.0-beta.12"
+    "vue-lazy-hydration": "1.0.0-beta.12",
+    "vue-numeric": "^2.3.0",
+    "vue-select": "^3.4.0"
   },
   "optionalDependencies": {
     "picturefill": "^3.0.3",

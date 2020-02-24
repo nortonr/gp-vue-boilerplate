@@ -1,19 +1,25 @@
 <template>
-  <div>
-    <search-main :selection="getMatrixByDepth(0)" />
-    <search-detail :selection="getMatrixByDepth(1)" />
-    <search-detail :selection="getMatrixByDepth(2)" />
-    {{ getValues() }}
-    {{ getInputs() }}
+  <form>
+    <search-main :selection="matrix.getSubmatrixByDepth(0)" />
+    <search-detail :selection="matrix.getSubmatrixByDepth(1)" />
+    <search-detail :selection="matrix.getSubmatrixByDepth(2)" />
+    {{ matrix.getQuery() }}
+    <component
+      :is="item.component"
+      v-for="(item, index) in matrix.getInputs()"
+      :key="index"
+      v-bind="item.options"
+      :model="item.model"
+    />
     <br>
     <nuxt-link to="/?first=b&second=b1&third=b1_a">
-      Test B1 A
+      Senioren
     </nuxt-link>
     <br>
     <nuxt-link to="/?first=c&second=c1">
-      Test C1
+      Studenten
     </nuxt-link>
-  </div>
+  </form>
 </template>
 
 <story
@@ -27,8 +33,8 @@
 <script>
 import SearchMain from '@/components/molecules/search/Main';
 import SearchDetail from '@/components/molecules/search/Detail';
-import matrix from '@/service/formMatrix';
-import formMatrix from '@/utils/formMatrix';
+import formConfig from '@/config/form';
+import FormMatrix from '@/classes/FormMatrix';
 
 export default {
   components: {
@@ -38,19 +44,18 @@ export default {
 
   data () {
     return {
-      matrix: formMatrix.updateByQuery(matrix, { ...this.$route.query })
+      matrix: new FormMatrix(formConfig, this.$route.query)
     };
   },
 
   watch: {
     $route (to, from) {
-      console.log('AJA', to.query);
-      formMatrix.updateByQuery(this.matrix, { ...to.query } || {});
+      this.matrix.updateByQuery(to.query || {});
     },
     matrix: {
       deep: true,
       handler () {
-        const result = this.getValues();
+        const result = this.matrix.getQuery();
         if (!Object.compare(this.$route.query, result)) {
           this.$router.replace({
             query: result
@@ -59,20 +64,6 @@ export default {
           });
         }
       }
-    }
-  },
-
-  methods: {
-    getMatrixByDepth (depth) {
-      return formMatrix.getByDepth(this.matrix, depth);
-    },
-
-    getInputs () {
-      return formMatrix.getInputs(this.matrix);
-    },
-
-    getValues () {
-      return formMatrix.getValues(this.matrix);
     }
   }
 };

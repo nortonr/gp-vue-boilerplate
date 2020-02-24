@@ -1,26 +1,19 @@
 <template>
   <div>
-    <drop-down
+    <select-box
       v-if="selection.model"
       :options="selection.options"
       :model="selection.model"
     />
-
-    <!-- <drop-down
-      v-if="dropDownThird"
-      :options="dropDownThird.options"
-      :model="dropDownThird.model"
-      @change.native="onChange"
-    /> -->
   </div>
 </template>
 
 <script>
-import DropDown from '@/components/atoms/DropDown';
+import SelectBox from '@/components/atoms/inputs/SelectBox';
 
 export default {
   components: {
-    DropDown
+    SelectBox
   },
 
   props: {
