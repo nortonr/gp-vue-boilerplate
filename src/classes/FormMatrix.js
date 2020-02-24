@@ -6,8 +6,9 @@ export default class FormMatrix {
 
   updateByQuery (query) {
     const q = { ...query };
-    updateMatrixByQuery(this.data.matrix, q);
-    updateInputsByQuery(this.getInputs(), q);
+    updateTreeByQuery(this.data.matrix, q);
+    updateListByQuery(this.getInputs(), q);
+    updateListByQuery(this.getCriteria(), q);
   }
 
   getSubmatrixByDepth (depth) {
@@ -18,24 +19,29 @@ export default class FormMatrix {
     return mapList(getEntry(this.data.matrix, 'inputs'), this.data.legend.inputs);
   }
 
-  getQuery () {
-    return Object.assign(getQuery(this.data.matrix), this.getInputs().reduce((result, input) => {
-      result[String(input.model.name)] = input.model.value;
-      return result;
-    }, {}));
+  getCriteria () {
+    return mapList(getEntry(this.data.matrix, 'criteria'), this.data.legend.criteria);
+  }
+
+  getValues () {
+    return Object.assign(
+      getTreeValues(this.data.matrix),
+      getListValues(this.getInputs()),
+      getListValues(this.getCriteria())
+    );
   }
 };
 
-function updateMatrixByQuery (matrix, query) {
+function updateTreeByQuery (matrix, query) {
   const keys = Object.keys(query);
   if (matrix.model && keys.includes(matrix.model.name)) {
     matrix.model.value = query[matrix.model.name] || matrix.model.value;
     delete query[matrix.model.name];
-    updateMatrixByQuery(getSubMatrix(matrix, matrix.model.value), query);
+    updateTreeByQuery(getSubMatrix(matrix, matrix.model.value), query);
   }
 }
 
-function updateInputsByQuery (inputs, query) {
+function updateListByQuery (inputs, query) {
   const keys = Object.keys(query);
   inputs.forEach((input) => {
     if (keys.includes(input.model.name)) {
@@ -69,12 +75,19 @@ function mapList (list, legend) {
   }).filter(n => n);
 }
 
-function getQuery (matrix, query = {}) {
+function getTreeValues (matrix, query = {}) {
   if (matrix.model) {
     query[String(matrix.model.name)] = matrix.model.value;
-    return getQuery(getSubMatrix(matrix), query);
+    return getTreeValues(getSubMatrix(matrix), query);
   }
   return query;
+}
+
+function getListValues (list) {
+  return list.reduce((result, input) => {
+    result[String(input.model.name)] = input.model.value;
+    return result;
+  }, {});
 }
 
 function getSubMatrix (matrix, value) {

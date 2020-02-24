@@ -54,7 +54,21 @@ export default {
         }
       }
     ],
-    criteria: []
+    criteria: [
+      {
+        component: () => import('@/components/atoms/inputs/RadioList'),
+        model: {
+          name: 'choose',
+          type: String,
+          value: 'b'
+        },
+        options: [
+          { label: 'Radio A', value: 'a' },
+          { label: 'Radio B', value: 'b' },
+          { label: 'Radio C', value: 'c' }
+        ]
+      }
+    ]
   },
   matrix: {
     model: {
@@ -78,6 +92,9 @@ export default {
         },
         inputs: [
           'price_min', 'price_max', 'squaremeter_min', 'squaremeter_max'
+        ],
+        criteria: [
+          'choose'
         ]
       },
       {
@@ -148,6 +165,9 @@ export default {
         },
         inputs: [
           'price_min', 'price_max', 'squaremeter_min', 'squaremeter_max'
+        ],
+        criteria: [
+          'choose'
         ]
       },
       {
@@ -166,6 +186,9 @@ export default {
         },
         inputs: [
           'price_min', 'price_max', 'squaremeter_min', 'squaremeter_max'
+        ],
+        criteria: [
+          'choose'
         ]
       },
       {
@@ -173,6 +196,9 @@ export default {
         value: 'd',
         inputs: [
           'price_min', 'price_max', 'squaremeter_min', 'squaremeter_max'
+        ],
+        criteria: [
+          'choose'
         ]
       }
     ]

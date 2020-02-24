@@ -3,12 +3,19 @@
     <search-main :selection="matrix.getSubmatrixByDepth(0)" />
     <search-detail :selection="matrix.getSubmatrixByDepth(1)" />
     <search-detail :selection="matrix.getSubmatrixByDepth(2)" />
-    {{ matrix.getQuery() }}
+    {{ matrix.getValues() }}
     <component
       :is="item.component"
       v-for="(item, index) in matrix.getInputs()"
       :key="index"
       v-bind="item.options"
+      :model="item.model"
+    />
+    <component
+      :is="item.component"
+      v-for="(item, index) in matrix.getCriteria()"
+      :key="'test'+ index"
+      :options="item.options"
       :model="item.model"
     />
     <br>
@@ -55,7 +62,8 @@ export default {
     matrix: {
       deep: true,
       handler () {
-        const result = this.matrix.getQuery();
+        console.log('aja');
+        const result = this.matrix.getValues();
         if (!Object.compare(this.$route.query, result)) {
           this.$router.replace({
             query: result
