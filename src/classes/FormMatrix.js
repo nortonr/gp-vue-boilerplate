@@ -36,11 +36,7 @@ function flatInputs (groups) {
   const list = groups.reduce((result, group) => {
     return result.concat(group.list);
   }, []);
-  return [
-    ...new Map(list.map(item => [
-      item.model.name, item
-    ])).values()
-  ];
+  return uniqueObjectList(list);
 }
 
 function updateTreeByQuery (matrix, query) {
@@ -90,10 +86,7 @@ function mapList (list, legend) {
 function mapGroups (groups, legend) {
   return groups.reduce((result, group) => {
     if (typeof group !== 'string' && !(group instanceof String)) {
-      result.push({
-        class: group.class,
-        list: mapList(group.list, legend)
-      });
+      result.push({ class: group.class, list: mapList(group.list, legend) });
     }
     return result;
   }, []);
@@ -120,4 +113,12 @@ function getSubMatrix (matrix, value) {
 
 function getOption (matrix, value) {
   return (matrix.options || []).find(option => option.value === (value || matrix.model.value));
+}
+
+function uniqueObjectList (list) {
+  return [
+    ...new Map(list.map(item => [
+      item.model.name, item
+    ])).values()
+  ];
 }
