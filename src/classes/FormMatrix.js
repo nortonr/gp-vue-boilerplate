@@ -23,6 +23,11 @@ export default class FormMatrix {
     return mapList(getEntry(this.data.matrix, 'criteria'), this.data.legend.criteria);
   }
 
+  getContentKey () {
+    console.log('AHA', getEntry(this.data.matrix, 'criteria'));
+    return getEntry(this.data.matrix, 'contentKey');
+  }
+
   getValues () {
     return Object.assign(
       getTreeValues(this.data.matrix),

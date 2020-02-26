@@ -24,6 +24,11 @@
       :options="item.options"
       :model="item.model"
     />
+    {{ matrix.getContentKey() }}
+    {{ content.get('keyA') }}
+    {{ content.get('keyA').getShortcut() }}
+    {{ content.get(matrix.getContentKey()).get('a') + 1 }}
+    {{ content.get(matrix.getContentKey()).get('a').getShortcut() }}
     <br>
     <nuxt-link to="/?first=b&second=b1&third=b1_a">
       Senioren
@@ -48,6 +53,7 @@ import SearchMain from '@/components/molecules/search/Main';
 import SearchDetail from '@/components/molecules/search/Detail';
 import formConfig from '@/config/form';
 import FormMatrix from '@/classes/FormMatrix';
+import content from '@/service/content';
 
 export default {
   components: {
@@ -56,7 +62,9 @@ export default {
   },
 
   data () {
+    console.log(content.get('content-default').get('a'));
     return {
+      content,
       matrix: new FormMatrix(formConfig, this.$route.query)
     };
   },

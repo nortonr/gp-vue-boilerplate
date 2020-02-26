@@ -79,6 +79,7 @@ export default {
       {
         label: 'Option A',
         value: 'a',
+        contentKey: 'content-default',
         matrix: {
           model: {
             name: 'second',
@@ -132,6 +133,7 @@ export default {
       {
         label: 'Option B',
         value: 'b',
+        contentKey: 'content-default',
         matrix: {
           model: {
             name: 'second',
@@ -141,6 +143,7 @@ export default {
             {
               label: 'Option B1',
               value: 'b1',
+              contentKey: 'content-special',
               matrix: {
                 model: {
                   name: 'third',
@@ -237,6 +240,7 @@ export default {
       {
         label: 'Option C',
         value: 'c',
+        contentKey: 'content-default',
         matrix: {
           model: {
             name: 'second',
@@ -290,6 +294,7 @@ export default {
       {
         label: 'Option D',
         value: 'd',
+        contentKey: 'content-default',
         inputs: [
           {
             class: 'price',
