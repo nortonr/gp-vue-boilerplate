@@ -356,3 +356,4 @@ All processes are working automatically. Nevertheless you should check before go
     - [ ] deployment pipeline
 - launch
   - GOOD LUCK.
+  - test push
